@@ -1,0 +1,147 @@
+@* Views/Admin/Index.cshtml *@
+@{
+    ViewData["Title"] = "Dashboard Admin";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin.css" />
+}
+
+<div class="dashboard">
+
+    @* ---- SIDEBAR ---- *@
+    <aside class="dashboard__sidebar">
+        <p class="sidebar__titre">Administration</p>
+
+        <a href="/Admin" class="sidebar__lien sidebar__lien--actif">
+            🏠 Tableau de bord
+        </a>
+        <a href="/Admin/Evenements" class="sidebar__lien">
+            🎭 Événements
+            @if ((int)ViewBag.EvenementsEnAttente > 0)
+            {
+                <span class="badge">@ViewBag.EvenementsEnAttente</span>
+            }
+        </a>
+        <a href="/Admin/Utilisateurs" class="sidebar__lien">
+            👥 Utilisateurs
+        </a>
+    </aside>
+
+    @* ---- CONTENU ---- *@
+    <div class="dashboard__contenu">
+
+        <div class="dashboard__entete">
+            <h1>Tableau de bord</h1>
+            <p>Bienvenue, @User.Identity!.Name</p>
+        </div>
+
+        @* Messages flash *@
+        @if (TempData["Succes"] != null)
+        {
+            <div class="flash-succes">✅ @TempData["Succes"]</div>
+        }
+        @if (TempData["Erreur"] != null)
+        {
+            <div class="flash-erreur">❌ @TempData["Erreur"]</div>
+        }
+
+        @* ---- STATS ---- *@
+        <div class="stats-grille">
+            <div class="stat-carte">
+                <div class="stat-carte__icone">🎭</div>
+                <div>
+                    <div class="stat-carte__nombre">@ViewBag.TotalEvenements</div>
+                    <div class="stat-carte__label">Événements</div>
+                </div>
+            </div>
+            <div class="stat-carte">
+                <div class="stat-carte__icone">⏳</div>
+                <div>
+                    <div class="stat-carte__nombre">@ViewBag.EvenementsEnAttente</div>
+                    <div class="stat-carte__label">En attente</div>
+                </div>
+            </div>
+            <div class="stat-carte">
+                <div class="stat-carte__icone">👥</div>
+                <div>
+                    <div class="stat-carte__nombre">@ViewBag.TotalUtilisateurs</div>
+                    <div class="stat-carte__label">Utilisateurs</div>
+                </div>
+            </div>
+            <div class="stat-carte">
+                <div class="stat-carte__icone">💶</div>
+                <div>
+                    <div class="stat-carte__nombre">@(((decimal)ViewBag.ChiffreAffaires).ToString("0"))€</div>
+                    <div class="stat-carte__label">Chiffre d'affaires</div>
+                </div>
+            </div>
+        </div>
+
+        @* ---- ÉVÉNEMENTS EN ATTENTE ---- *@
+        <div class="table-container">
+            <div class="table-entete">
+                <h2>⏳ Événements en attente de validation</h2>
+                <a href="/Admin/Evenements?statut=EnAttente" class="btn-secondaire">
+                    Voir tout →
+                </a>
+            </div>
+
+            @{
+                var enAttente = ViewBag.EvenementsEnAttenteList as
+                    List<Labilletterie.Models.Evenement>;
+            }
+
+            @if (enAttente != null && enAttente.Any())
+            {
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Événement</th>
+                            <th>Organisateur</th>
+                            <th>Date</th>
+                            <th>Prix</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var evt in enAttente)
+                        {
+                            <tr>
+                                <td><strong>@evt.Titre</strong><br />
+                                    <small style="color:var(--couleur-texte-secondaire)">@evt.Categorie</small>
+                                </td>
+                                <td>@evt.Organisateur?.Prenom @evt.Organisateur?.Nom</td>
+                                <td>@evt.DateEvenement.ToString("dd/MM/yyyy")</td>
+                                <td>@evt.PrixBase.ToString("0.00") €</td>
+                                <td>
+                                    <div style="display:flex; gap: var(--espace-sm);">
+                                        <form asp-action="Valider" asp-route-id="@evt.Id" method="post">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="btn-action btn-action--valider">
+                                                ✅ Valider
+                                            </button>
+                                        </form>
+                                        <form asp-action="Refuser" asp-route-id="@evt.Id" method="post">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="btn-action btn-action--refuser">
+                                                ❌ Refuser
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p style="padding: var(--espace-xl); text-align:center; color:var(--couleur-texte-secondaire);">
+                    ✅ Aucun événement en attente.
+                </p>
+            }
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,107 @@
+@* Views/Evenements/Creer.cshtml *@
+@model Labilletterie.ViewModels.EvenementViewModel
+
+@{
+    ViewData["Title"] = "Créer un événement";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/evenements.css" />
+    <link rel="stylesheet" href="~/css/auth.css" />
+}
+
+<div class="form-creation">
+    <h1>Créer un événement</h1>
+
+    @if (TempData["Succes"] != null)
+    {
+        <div class="message-succes">✅ @TempData["Succes"]</div>
+    }
+
+    <form asp-action="Creer" method="post">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="erreur-message"></div>
+
+        <div class="form-grille">
+
+            <div class="form-groupe form-groupe--pleine-largeur">
+                <label asp-for="Titre"></label>
+                <input asp-for="Titre" class="form-input" placeholder="Nom de votre événement" />
+                <span asp-validation-for="Titre" class="erreur-champ"></span>
+            </div>
+
+            <div class="form-groupe form-groupe--pleine-largeur">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" placeholder="Décrivez votre événement..."></textarea>
+                <span asp-validation-for="Description" class="erreur-champ"></span>
+            </div>
+
+            <div class="form-groupe">
+                <label asp-for="DateEvenement"></label>
+                <input asp-for="DateEvenement" type="datetime-local" class="form-input"
+                       value="@Model.DateEvenement.ToString("yyyy-MM-ddTHH:mm")" />
+                <span asp-validation-for="DateEvenement" class="erreur-champ"></span>
+            </div>
+
+            <div class="form-groupe">
+                <label asp-for="Categorie"></label>
+                <select asp-for="Categorie" class="form-input">
+                    <option value="">-- Choisir --</option>
+                    <option value="Concert">🎵 Concert</option>
+                    <option value="Soirée">🎉 Soirée</option>
+                    <option value="Festival">🎪 Festival</option>
+                    <option value="Spectacle">🎭 Spectacle</option>
+                    <option value="Formation">📚 Formation</option>
+                    <option value="Convention">🎮 Convention</option>
+                </select>
+                <span asp-validation-for="Categorie" class="erreur-champ"></span>
+            </div>
+
+            <div class="form-groupe form-groupe--pleine-largeur">
+                <label asp-for="Lieu"></label>
+                <input asp-for="Lieu" class="form-input" placeholder="Adresse complète du lieu" />
+                <span asp-validation-for="Lieu" class="erreur-champ"></span>
+            </div>
+
+            <div class="form-groupe">
+                <label asp-for="NombrePlacesTotal"></label>
+                <input asp-for="NombrePlacesTotal" type="number" class="form-input" min="1" />
+                <span asp-validation-for="NombrePlacesTotal" class="erreur-champ"></span>
+            </div>
+
+            <div class="form-groupe">
+                <label asp-for="PrixBase"></label>
+                <input asp-for="PrixBase" type="number" step="0.01" class="form-input" min="0" placeholder="0.00" />
+                <span asp-validation-for="PrixBase" class="erreur-champ"></span>
+            </div>
+
+            <div class="form-groupe form-groupe--inline form-groupe--pleine-largeur">
+                <input asp-for="EstPrive" type="checkbox" id="estPrive" />
+                <label asp-for="EstPrive">Événement privé (accès par mot de passe)</label>
+            </div>
+
+            <div class="form-groupe form-groupe--pleine-largeur" id="champ-mdp" style="display:none;">
+                <label asp-for="MotDePassePrive"></label>
+                <input asp-for="MotDePassePrive" class="form-input" placeholder="Mot de passe d'accès" />
+            </div>
+
+        </div>
+
+        <button type="submit" class="btn-principal">
+            Soumettre l'événement
+        </button>
+    </form>
+</div>
+
+@* Affiche/masque le champ mot de passe si événement privé *@
+<script>
+    const checkbox = document.getElementById('estPrive');
+    const champMdp = document.getElementById('champ-mdp');
+
+    checkbox.addEventListener('change', () => {
+        champMdp.style.display = checkbox.checked ? 'block' : 'none';
+    });
+
+    // Au chargement, vérifie l'état initial
+    if (checkbox.checked) champMdp.style.display = 'block';
+</script>

@@ -1,0 +1,117 @@
+/* auth.css
+   Styles pour les pages d'inscription et connexion. */
+
+/* Conteneur centré */
+.auth-container {
+    width: 100%;
+    max-width: 480px;
+    /* Largeur max du formulaire */
+    margin: var(--espace-xxl) auto;
+    padding: var(--espace-xl);
+    background-color: var(--couleur-fond-carte);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: var(--arrondi-md);
+    box-shadow: var(--ombre-carte);
+}
+
+.auth-container h1 {
+    text-align: center;
+    margin-bottom: var(--espace-xl);
+    font-size: 1.8rem;
+}
+
+/* ---- Groupe de champ ---- */
+.form-groupe {
+    display: flex;
+    flex-direction: column;
+    /* Label au-dessus, input en-dessous */
+    gap: var(--espace-xs);
+    margin-bottom: var(--espace-md);
+}
+
+/* Label */
+.form-groupe label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--couleur-texte-secondaire);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* Input / Select */
+.form-input {
+    width: 100%;
+    padding: var(--espace-md);
+    background-color: var(--couleur-fond-input);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: var(--arrondi-sm);
+    color: var(--couleur-texte);
+    font-family: var(--police-principale);
+    font-size: 1rem;
+    transition: var(--transition);
+    outline: none;
+    /* Supprime le contour bleu par défaut */
+}
+
+/* Focus : met en évidence le champ actif */
+.form-input:focus {
+    border-color: var(--couleur-bordeaux-clair);
+    box-shadow: 0 0 0 3px var(--couleur-bordeaux-transparent);
+}
+
+/* Select : icône flèche personnalisée */
+select.form-input {
+    cursor: pointer;
+    appearance: none;
+    /* Supprime le style par défaut du navigateur */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23aaa' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right var(--espace-md) center;
+    padding-right: var(--espace-xl);
+}
+
+/* Groupe inline (checkbox + label) */
+.form-groupe--inline {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--espace-sm);
+}
+
+.form-groupe--inline label {
+    text-transform: none;
+    font-size: 0.9rem;
+    color: var(--couleur-texte-secondaire);
+    cursor: pointer;
+}
+
+/* ---- Messages d'erreur ---- */
+.erreur-message {
+    background-color: rgba(231, 76, 60, 0.1);
+    border: 1px solid var(--couleur-erreur);
+    border-radius: var(--arrondi-sm);
+    padding: var(--espace-md);
+    color: var(--couleur-erreur);
+    font-size: 0.9rem;
+    margin-bottom: var(--espace-md);
+}
+
+.erreur-champ {
+    color: var(--couleur-erreur);
+    font-size: 0.8rem;
+}
+
+/* ---- Lien bas de formulaire ---- */
+.lien-auth {
+    text-align: center;
+    margin-top: var(--espace-md);
+    color: var(--couleur-texte-secondaire);
+    font-size: 0.9rem;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 520px) {
+    .auth-container {
+        margin: var(--espace-lg) var(--espace-md);
+        padding: var(--espace-lg);
+    }
+}

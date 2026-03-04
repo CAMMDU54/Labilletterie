@@ -1,0 +1,54 @@
+/* variables.css
+   Toutes les couleurs et valeurs réutilisables du projet.
+   On les définit une seule fois ici, on les utilise partout. */
+
+:root {
+    /* ---- Couleurs principales ---- */
+    --couleur-fond: #000000;
+    /* Fond noir */
+    --couleur-fond-carte: #111111;
+    /* Cartes légèrement plus claires */
+    --couleur-fond-input: #1a1a1a;
+    /* Fond des champs de formulaire */
+    --couleur-bordure: #2a2a2a;
+    /* Bordures subtiles */
+
+    --couleur-bordeaux: #4C1C24;
+    /* Couleur accent principale */
+    --couleur-bordeaux-clair: #6b2835;
+    /* Hover sur les boutons */
+    --couleur-bordeaux-transparent: rgba(76, 28, 36, 0.15);
+
+    --couleur-texte: #ffffff;
+    /* Texte principal blanc */
+    --couleur-texte-secondaire: #aaaaaa;
+    /* Texte secondaire gris */
+    --couleur-erreur: #e74c3c;
+    /* Rouge pour les erreurs */
+    --couleur-succes: #2ecc71;
+    /* Vert pour les succès */
+
+    /* ---- Typographie ---- */
+    --police-principale: 'Montserrat', sans-serif;
+    --taille-texte-base: 16px;
+
+    /* ---- Espacement ---- */
+    --espace-xs: 4px;
+    --espace-sm: 8px;
+    --espace-md: 16px;
+    --espace-lg: 24px;
+    --espace-xl: 40px;
+    --espace-xxl: 80px;
+
+    /* ---- Arrondis ---- */
+    --arrondi-sm: 6px;
+    --arrondi-md: 12px;
+    --arrondi-lg: 24px;
+
+    /* ---- Ombres ---- */
+    --ombre-carte: 0 4px 24px rgba(0, 0, 0, 0.4);
+    --ombre-bordeaux: 0 4px 20px rgba(76, 28, 36, 0.4);
+
+    /* ---- Transitions ---- */
+    --transition: all 0.3s ease;
+}

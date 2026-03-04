@@ -1,0 +1,244 @@
+/* base.css
+   Styles globaux appliqués à toute l'application. */
+
+/* Import de la police Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
+/* ---- Reset de base ---- */
+/* Supprime les marges et paddings par défaut du navigateur */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Le padding ne s'ajoute pas à la largeur */
+}
+
+/* ---- Corps de la page ---- */
+body {
+    font-family: var(--police-principale);
+    font-size: var(--taille-texte-base);
+    background-color: var(--couleur-fond);
+    color: var(--couleur-texte);
+    line-height: 1.6;
+    min-height: 100vh;
+    /* Occupe au minimum toute la hauteur de l'écran */
+}
+
+/* ---- Liens ---- */
+a {
+    color: var(--couleur-bordeaux-clair);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--couleur-texte);
+}
+
+/* ---- Titres ---- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: var(--espace-md);
+}
+
+h1 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
+
+/* clamp(min, préféré, max) = taille fluide selon la largeur d'écran */
+
+h2 {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+}
+
+h3 {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+}
+
+/* ---- Bouton principal ---- */
+.btn-principal {
+    display: inline-block;
+    width: 100%;
+    padding: var(--espace-md) var(--espace-xl);
+    background-color: var(--couleur-bordeaux);
+    color: var(--couleur-texte);
+    font-family: var(--police-principale);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: var(--arrondi-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: var(--espace-lg);
+}
+
+.btn-principal:hover {
+    background-color: var(--couleur-bordeaux-clair);
+    box-shadow: var(--ombre-bordeaux);
+    transform: translateY(-2px);
+    /* Légère élévation au survol */
+}
+
+/* ---- Bouton secondaire (contour) ---- */
+.btn-secondaire {
+    display: inline-block;
+    padding: var(--espace-sm) var(--espace-lg);
+    background-color: transparent;
+    color: var(--couleur-texte);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: var(--arrondi-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: var(--police-principale);
+    font-weight: 500;
+}
+
+.btn-secondaire:hover {
+    border-color: var(--couleur-bordeaux-clair);
+    color: var(--couleur-bordeaux-clair);
+}
+
+/* ---- Navbar ---- */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--espace-md) var(--espace-xl);
+    background-color: rgba(0, 0, 0, 0.95);
+    border-bottom: 1px solid var(--couleur-bordure);
+    position: sticky;
+    /* Reste en haut lors du scroll */
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    /* Effet flou derrière la navbar */
+}
+
+.navbar__logo {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--couleur-texte);
+    letter-spacing: -0.02em;
+}
+
+.navbar__logo span {
+    color: var(--couleur-bordeaux-clair);
+}
+
+.navbar__liens {
+    display: flex;
+    align-items: center;
+    gap: var(--espace-lg);
+    list-style: none;
+}
+
+.navbar__liens a {
+    color: var(--couleur-texte-secondaire);
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
+}
+
+.navbar__liens a:hover {
+    color: var(--couleur-texte);
+}
+
+/* ---- Menu burger (mobile) ---- */
+.navbar__burger {
+    display: none;
+    /* Caché sur desktop */
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: var(--espace-sm);
+}
+
+.navbar__burger span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background-color: var(--couleur-texte);
+    transition: var(--transition);
+}
+
+/* ---- Footer ---- */
+.footer {
+    background-color: var(--couleur-fond-carte);
+    border-top: 1px solid var(--couleur-bordure);
+    padding: var(--espace-xl);
+    text-align: center;
+    color: var(--couleur-texte-secondaire);
+    font-size: 0.85rem;
+    margin-top: var(--espace-xxl);
+}
+
+.footer__liens {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--espace-lg);
+    list-style: none;
+    margin-bottom: var(--espace-md);
+}
+
+/* ---- Container central ---- */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--espace-lg);
+}
+
+/* ============================================
+   RESPONSIVE — Mobile first
+   On ajoute des styles pour les grands écrans
+   ============================================ */
+
+/* Tablette et plus (768px+) */
+@media (min-width: 768px) {
+    .navbar__burger {
+        display: none;
+    }
+}
+
+/* Mobile (moins de 768px) */
+@media (max-width: 767px) {
+    .navbar {
+        padding: var(--espace-md);
+    }
+
+    .navbar__burger {
+        display: flex;
+        /* Affiche le burger sur mobile */
+    }
+
+    .navbar__liens {
+        display: none;
+        /* Cache le menu sur mobile par défaut */
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background-color: var(--couleur-fond-carte);
+        padding: var(--espace-lg);
+        border-bottom: 1px solid var(--couleur-bordure);
+    }
+
+    /* Quand le menu burger est ouvert */
+    .navbar__liens--ouvert {
+        display: flex;
+    }
+}

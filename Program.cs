@@ -1,22 +1,31 @@
 // Program.cs
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Labilletterie.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// --- AJOUT : connexion à SQLite ---
-// On indique à ASP.NET d'utiliser SQLite avec notre ApplicationDbContext
+// Connexion SQLite
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite("Data Source=labilletterie.db"));
-// "labilletterie.db" = nom du fichier SQLite qui sera créé à la racine du projet
 
-// Ajout des contrôleurs avec vues (déjà présent par défaut)
+// --- AJOUT : Authentification par cookies ---
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        // Page de connexion si non connecté
+        options.LoginPath = "/Compte/Connexion";
+        // Page si accès refusé (mauvais rôle)
+        options.AccessDeniedPath = "/Compte/AccesRefuse";
+        // Nom du cookie
+        options.Cookie.Name = "Labilletterie.Auth";
+    });
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Configuration du pipeline HTTP (déjà présent par défaut)
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -26,7 +35,10 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-app.UseAuthorization();
+
+// --- IMPORTANT : l'ordre est obligatoire ---
+app.UseAuthentication(); // Qui es-tu ?
+app.UseAuthorization();  // As-tu le droit ?
 
 app.MapControllerRoute(
     name: "default",

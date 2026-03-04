@@ -1,0 +1,63 @@
+@* Views/Compte/Inscription.cshtml *@
+@model Labilletterie.ViewModels.InscriptionViewModel
+
+@{
+    ViewData["Title"] = "Inscription";
+}
+
+<div class="auth-container">
+    <h1>Créer un compte</h1>
+
+    <form asp-action="Inscription" method="post">
+        @* Protection anti-CSRF automatique *@
+        @Html.AntiForgeryToken()
+
+        @* Affiche les erreurs globales *@
+        <div asp-validation-summary="ModelOnly" class="erreur-message"></div>
+
+        <div class="form-groupe">
+            <label asp-for="Prenom"></label>
+            <input asp-for="Prenom" class="form-input" placeholder="Votre prénom" />
+            <span asp-validation-for="Prenom" class="erreur-champ"></span>
+        </div>
+
+        <div class="form-groupe">
+            <label asp-for="Nom"></label>
+            <input asp-for="Nom" class="form-input" placeholder="Votre nom" />
+            <span asp-validation-for="Nom" class="erreur-champ"></span>
+        </div>
+
+        <div class="form-groupe">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-input" placeholder="votre@email.com" />
+            <span asp-validation-for="Email" class="erreur-champ"></span>
+        </div>
+
+        <div class="form-groupe">
+            <label asp-for="MotDePasse"></label>
+            <input asp-for="MotDePasse" class="form-input" placeholder="8 caractères minimum" />
+            <span asp-validation-for="MotDePasse" class="erreur-champ"></span>
+        </div>
+
+        <div class="form-groupe">
+            <label asp-for="ConfirmationMotDePasse"></label>
+            <input asp-for="ConfirmationMotDePasse" class="form-input" />
+            <span asp-validation-for="ConfirmationMotDePasse" class="erreur-champ"></span>
+        </div>
+
+        <div class="form-groupe">
+            <label asp-for="Role"></label>
+            <select asp-for="Role" class="form-input">
+                <option value="Acheteur">Acheteur</option>
+                <option value="Organisateur">Organisateur</option>
+            </select>
+            <span asp-validation-for="Role" class="erreur-champ"></span>
+        </div>
+
+        <button type="submit" class="btn-principal">Créer mon compte</button>
+
+        <p class="lien-auth">
+            Déjà un compte ? <a asp-action="Connexion">Se connecter</a>
+        </p>
+    </form>
+</div>

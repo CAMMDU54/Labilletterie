@@ -1,0 +1,39 @@
+@* Views/Compte/Connexion.cshtml *@
+@model Labilletterie.ViewModels.ConnexionViewModel
+
+@{
+    ViewData["Title"] = "Connexion";
+}
+
+<div class="auth-container">
+    <h1>Se connecter</h1>
+
+    <form asp-action="Connexion" method="post">
+        @Html.AntiForgeryToken()
+
+        <div asp-validation-summary="ModelOnly" class="erreur-message"></div>
+
+        <div class="form-groupe">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-input" placeholder="votre@email.com" />
+            <span asp-validation-for="Email" class="erreur-champ"></span>
+        </div>
+
+        <div class="form-groupe">
+            <label asp-for="MotDePasse"></label>
+            <input asp-for="MotDePasse" class="form-input" placeholder="Votre mot de passe" />
+            <span asp-validation-for="MotDePasse" class="erreur-champ"></span>
+        </div>
+
+        <div class="form-groupe form-groupe--inline">
+            <input asp-for="SeSouvenir" type="checkbox" />
+            <label asp-for="SeSouvenir">Se souvenir de moi</label>
+        </div>
+
+        <button type="submit" class="btn-principal">Se connecter</button>
+
+        <p class="lien-auth">
+            Pas encore de compte ? <a asp-action="Inscription">S'inscrire</a>
+        </p>
+    </form>
+</div>

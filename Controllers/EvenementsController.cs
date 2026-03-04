@@ -61,6 +61,7 @@ namespace Labilletterie.Controllers
         // DÉTAIL D'UN ÉVÉNEMENT
         // GET /Evenements/{id}
         // ============================================================
+        [Route("Evenements/{id:int}")]
         public async Task<IActionResult> Detail(int id)
         {
             var evenement = await _context.Evenements

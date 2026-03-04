@@ -33,6 +33,10 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+// Enregistrement des services
+builder.Services.AddScoped<Labilletterie.Services.QrCodeService>();
+builder.Services.AddScoped<Labilletterie.Services.PdfBilletService>();
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())

@@ -42,7 +42,7 @@
 
             <ul class="detail-evenement__meta-liste">
                 <li>
-                    📅 <div><strong>@Model.DateEvenement.ToString("dddd dd MMMM                yyyy")</strong><br />@Model.DateEvenement.ToString("HH:mm")</div>
+                    📅 <div><strong>@Model.DateEvenement.ToString("dddd dd MMMM                      yyyy")</strong><br />@Model.DateEvenement.ToString("HH:mm")</div>
                 </li>
                 <li>
                     📍 <div><strong>@Model.Lieu</strong></div>
@@ -59,7 +59,7 @@
         {
             @if (User.Identity != null && User.Identity.IsAuthenticated)
             {
-                <a href="/Billets/Acheter/@Model.Id" class="btn-principal">
+                <a asp-controller="Billets" asp-action="Acheter" asp-route-evenementId="@Model.Id" class="btn-principal">
                     🎟️ Acheter un billet
                 </a>
             }

@@ -112,7 +112,7 @@
             <div class="evenements-grille">
                 @foreach (var evt in Model)
                 {
-                    <a href="/Evenements/@evt.Id" class="evenement-carte">
+                    <a asp-controller="Evenements" asp-action="Detail" asp-route-id="@evt.Id" class="evenement-carte">
                         <div class="evenement-carte__image">
                             🎟️
                             <span class="evenement-carte__categorie">@evt.Categorie</span>
@@ -131,10 +131,11 @@
                                 <span class="evenement-carte__prix">
                                     @(evt.PrixBase == 0 ? "Gratuit" : evt.PrixBase.ToString("0.00") + " €")
                                 </span>
-                                <span class="evenement-carte__places @(evt.NombrePlacesRestantes < 20 ? "evenement-carte__places--urgent" : "")">
+                                <span
+                                    class="evenement-carte__places @(evt.NombrePlacesRestantes < 20 ? "evenement-carte__places--urgent" : "")">
                                     @(evt.NombrePlacesRestantes < 20
-                                        ? $"⚡ {evt.NombrePlacesRestantes} places restantes"
-                                        : $"{evt.NombrePlacesRestantes} places")
+                                    ? $"⚡ {evt.NombrePlacesRestantes} places restantes"
+                                    : $"{evt.NombrePlacesRestantes} places")
                                 </span>
                             </div>
                         </div>

@@ -1,0 +1,97 @@
+@* Views/Billets/Acheter.cshtml *@
+@model Labilletterie.Models.Evenement
+
+@{
+    ViewData["Title"] = "Acheter un billet";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/billets.css" />
+}
+
+<div class="achat-container">
+    <h1>🎟️ Choisir votre billet</h1>
+
+    <div class="achat-grille">
+
+        @* Formulaire de choix *@
+        <form asp-action="Confirmer" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="evenementId" value="@Model.Id" />
+
+            <div class="types-billets">
+
+                @* Standard *@
+                <label class="type-billet" id="label-standard">
+                    <input type="radio" name="typeBillet"              value="Standard" checked                    onchange="selectionnerType(this)" />
+                    <div class="type-billet__info">
+                        <span class="type-billet__nom">🎟️ Standard</span>
+                        <span class="type-billet__description">Accès général à l'événement</span>
+                    </div>
+                    <span class="type-billet__prix">
+                        @(Model.PrixBase == 0 ? "Gratuit" : Model.PrixBase.ToString("0.00") + " €")
+                    </span>
+                </label>
+
+                @* VIP *@
+                <label class="type-billet" id="label-vip">
+                    <input type="radio" name="typeBillet"     value="VIP"          onchange="selectionnerType(this)" />
+                    <div class="type-billet__info">
+                        <span class="type-billet__nom">⭐ VIP</span>
+                        <span class="type-billet__description">Accès prioritaire + zone VIP</span>
+                    </div>
+                    <span class="type-billet__prix">
+                        @((Model.PrixBase * 2).ToString("0.00")) €
+                    </span>
+                </label>
+
+                @* Réduit *@
+                <label class="type-billet" id="label-reduit">
+                    <input type="radio" name="typeBillet"                value="Réduit" onchange="selectionnerType(this)" />
+                    <div class="type-billet__info">
+                        <span class="type-billet__nom">🎓 Réduit</span>
+                        <span class="type-billet__description">Étudiant / -26 ans / PMR</span>
+                    </div>
+                    <span class="type-billet__prix">
+                        @((Model.PrixBase * 0.5m).ToString("0.00")) €
+                    </span>
+                </label>
+
+            </div>
+
+            <button type="submit" class="btn-principal">
+                Confirmer l'achat →
+            </button>
+
+        </form>
+
+        @* Résumé de l'événement *@
+        <div class="achat-resume">
+            <h2>@Model.Titre</h2>
+            <ul class="achat-resume__meta">
+                <li>📅 @Model.DateEvenement.ToString("dddd dd MMMM yyyy à HH:mm")</li>
+                <li>📍 @Model.Lieu</li>
+                <li>🎭 @Model.Categorie</li>
+                <li>🎟️ @Model.NombrePlacesRestantes places restantes</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+@* Gestion visuelle de la sélection *@
+<script>
+    // Sélectionne visuellement le bon label
+    function selectionnerType(radio) {
+        // Retire la classe de tous les labels
+        document.querySelectorAll('.type-billet').forEach(label => {
+            label.classList.remove('type-billet--selectionne');
+        });
+        // Ajoute la classe au label parent du radio sélectionné
+        radio.closest('.type-billet').classList.add('type-billet--selectionne');
+    }
+
+    // Sélectionne "Standard" par défaut au chargement
+    document.getElementById('label-standard')
+        .classList.add('type-billet--selectionne');
+</script>

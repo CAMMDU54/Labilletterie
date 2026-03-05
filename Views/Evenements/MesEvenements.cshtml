@@ -1,0 +1,84 @@
+@* Views/Evenements/MesEvenements.cshtml *@
+@model List<Labilletterie.Models.Evenement>
+
+@{
+    ViewData["Title"] = "Mes événements";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/evenements.css" />
+    <link rel="stylesheet" href="~/css/accueil.css" />
+}
+
+<div class="container" style="padding-top: var(--espace-xl);">
+
+    <div
+        style="display:flex; justify-content:space-between; align-items:center; margin-bottom: var(--espace-xl); flex-wrap:wrap; gap: var(--espace-md);">
+        <h1>Mes événements</h1>
+        <a href="/Evenements/Creer" class="btn-principal"
+               style="width:auto; padding: var(--espace-sm) var(--espace-lg);">
+            + Créer un événement
+        </a>
+    </div>
+
+    @if (TempData["Succes"] != null)
+    {
+        <div class="message-succes">✅ @TempData["Succes"]</div>
+    }
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="evenements-grille">
+            @foreach (var evt in Model)
+            {
+                <div class="evenement-carte" style="cursor:default;">
+                    <div class="evenement-carte__image">
+                        🎟️
+                        <span class="evenement-carte__categorie">@evt.Categorie</span>
+                    </div>
+                    <div class="evenement-carte__corps">
+                        <h3 class="evenement-carte__titre">@evt.Titre</h3>
+                        <div class="evenement-carte__meta">
+                            <span>📅 @evt.DateEvenement.ToString("dd MMM yyyy")</span>
+                            <span>📍 @evt.Lieu</span>
+                            <span>
+                                @* Badge de statut coloré *@
+                                @switch (evt.Statut)
+                                {
+                                    case "Validé":
+                                        <span style="color: var(--couleur-succes);">✅ Validé</span>
+                                        break;
+                                    case "EnAttente":
+                                        <span style="color: orange;">⏳ En attente</span>
+                                        break;
+                                    case "Refusé":
+                                        <span style="color: var(--couleur-erreur);">❌ Refusé</span>
+                                        break;
+                                    default:
+                                        <span>@evt.Statut</span>
+                                        break;
+                                }
+                            </span>
+                        </div>
+                        <div class="evenement-carte__pied">
+                            <span class="evenement-carte__prix">@evt.PrixBase.ToString("0.00") €</span>
+                            <span class="evenement-carte__places">@evt.NombrePlacesRestantes / @evt.NombrePlacesTotal
+                                places</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    else
+        {
+            <div style="text-align:center; padding: var(--espace-xxl); color: var(--couleur-texte-secondaire);">
+                <p style="font-size: 3rem;">🎭</p>
+                <p>Vous n'avez pas encore créé d'événement.</p>
+                <a href="/Evenements/Creer" class="btn-principal"
+                       style="width:auto; display:inline-block; margin-top: var(--espace-lg);">
+                    Créer mon premier événement
+                </a>
+            </div>
+        }
+    </div>

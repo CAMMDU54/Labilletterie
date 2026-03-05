@@ -1,31 +1,32 @@
-using System.Diagnostics;
+// Controllers/HomeController.cs
+
 using Microsoft.AspNetCore.Mvc;
-using Labilletterie.Models;
+using Labilletterie.Data;
+using Microsoft.EntityFrameworkCore;
 
-namespace Labilletterie.Controllers;
-
-public class HomeController : Controller
+namespace Labilletterie.Controllers
 {
-    private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
+    public class HomeController : Controller
     {
-        _logger = logger;
-    }
+        private readonly ApplicationDbContext _context;
 
-    public IActionResult Index()
-    {
-        return View();
-    }
+        public HomeController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
-    public IActionResult Privacy()
-    {
-        return View();
-    }
+        // Page d'accueil
+        public async Task<IActionResult> Index()
+        {
+            // Récupère les 6 derniers événements validés
+            var evenements = await _context.Evenements
+                .Where(e => e.Statut == "Validé" && !e.EstPrive)
+                .OrderByDescending(e => e.DateCreation)
+                .Take(6)
+                .Include(e => e.Organisateur) // Charge aussi l'organisateur
+                .ToListAsync();
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(evenements);
+        }
     }
 }

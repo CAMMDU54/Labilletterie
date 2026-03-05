@@ -1,0 +1,82 @@
+@* Views/Evenements/Detail.cshtml *@
+@model Labilletterie.Models.Evenement
+
+@{
+    ViewData["Title"] = Model.Titre;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/evenements.css" />
+}
+
+<div class="detail-evenement">
+
+    <div class="detail-evenement__entete">
+        <span class="detail-evenement__badge">@Model.Categorie</span>
+        <h1 class="detail-evenement__titre">@Model.Titre</h1>
+    </div>
+
+    <div class="detail-evenement__infos">
+
+        @* Description *@
+        <div>
+            <h2 style="margin-bottom: var(--espace-md);">À propos</h2>
+            <p class="detail-evenement__description">@Model.Description</p>
+
+            @if (Model.Organisateur != null)
+            {
+                <div style="margin-top: var(--espace-xl); padding-top: var(--espace-xl); border-top: 1px solid var(--couleur-bordure);">
+                    <h3 style="margin-bottom: var(--espace-sm);">Organisateur</h3>
+                    <p style="color: var(--couleur-texte-secondaire);">
+                        @Model.Organisateur.Prenom @Model.Organisateur.Nom
+                    </p>
+                </div>
+            }
+        </div>
+
+        @* Bloc achat *@
+        <div class="detail-evenement__achat">
+            <div class="detail-evenement__prix-total">
+                @(Model.PrixBase == 0 ? "Gratuit" : Model.PrixBase.ToString("0.00") + " €")
+            </div>
+
+            <ul class="detail-evenement__meta-liste">
+                <li>
+                    📅 <div><strong>@Model.DateEvenement.ToString("dddd dd MMMM                      yyyy")</strong><br />@Model.DateEvenement.ToString("HH:mm")</div>
+                </li>
+                <li>
+                    📍 <div><strong>@Model.Lieu</strong></div>
+                </li>
+                <li>
+                    🎟️ <div>
+                    <strong>@Model.NombrePlacesRestantes places restantes</strong>
+                    <br />sur @Model.NombrePlacesTotal au total
+                </div>
+            </li>
+        </ul>
+
+        @if (Model.NombrePlacesRestantes > 0)
+        {
+            @if (User.Identity != null && User.Identity.IsAuthenticated)
+            {
+                <a asp-controller="Billets" asp-action="Acheter" asp-route-evenementId="@Model.Id" class="btn-principal">
+                    🎟️ Acheter un billet
+                </a>
+            }
+            else
+            {
+                <a href="/Compte/Connexion" class="btn-principal">
+                    Connectez-vous pour acheter
+                </a>
+            }
+        }
+        else
+        {
+            <button class="btn-principal" disabled style="opacity:0.5; cursor:not-allowed;">
+                Événement complet
+            </button>
+        }
+    </div>
+
+</div>
+</div>

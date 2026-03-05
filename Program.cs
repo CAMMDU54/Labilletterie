@@ -1,24 +1,59 @@
+// Program.cs
+
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Labilletterie.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Connexion SQLite
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlite("Data Source=labilletterie.db"));
+
+// --- AJOUT : Authentification par cookies ---
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        // Page de connexion si non connecté
+        options.LoginPath = "/Compte/Connexion";
+        // Page si accès refusé (mauvais rôle)
+        options.AccessDeniedPath = "/Compte/AccesRefuse";
+        // Nom du cookie
+        options.Cookie.Name = "Labilletterie.Auth";
+    });
+
 builder.Services.AddControllersWithViews();
+
+// Sessions (pour événements privés)
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+// Enregistrement des services
+builder.Services.AddScoped<Labilletterie.Services.QrCodeService>();
+builder.Services.AddScoped<Labilletterie.Services.PdfBilletService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
 
-app.UseAuthorization();
+// --- IMPORTANT : l'ordre est obligatoire ---
+app.UseAuthentication(); // Qui es-tu ?
+app.UseAuthorization();  // As-tu le droit ?
+
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

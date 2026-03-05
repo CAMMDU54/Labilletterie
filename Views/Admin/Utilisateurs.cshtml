@@ -1,0 +1,104 @@
+@* Views/Admin/Utilisateurs.cshtml *@
+@model List<Labilletterie.Models.Utilisateur>
+
+@{
+    ViewData["Title"] = "Gestion des utilisateurs";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin.css" />
+}
+
+<div class="dashboard">
+
+    <aside class="dashboard__sidebar">
+        <p class="sidebar__titre">Administration</p>
+        <a href="/Admin" class="sidebar__lien">🏠 Tableau de bord</a>
+        <a href="/Admin/Evenements" class="sidebar__lien">🎭 Événements</a>
+        <a href="/Admin/Utilisateurs" class="sidebar__lien sidebar__lien--actif">👥 Utilisateurs</a>
+    </aside>
+
+    <div class="dashboard__contenu">
+
+        <div class="dashboard__entete">
+            <h1>Gestion des utilisateurs</h1>
+        </div>
+
+        @if (TempData["Succes"] != null)
+        {
+            <div class="flash-succes">✅ @TempData["Succes"]</div>
+        }
+
+        <div class="table-container">
+            <div class="table-entete">
+                <h2>👥 Tous les utilisateurs (@Model.Count)</h2>
+                <form method="get" action="/Admin/Utilisateurs">
+                    <div class="admin-recherche">
+                        <input type="text" name="recherche"       value="@ViewBag.Recherche"  placeholder="Rechercher..." />
+                        <button type="submit">🔍</button>
+                    </div>
+                </form>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Utilisateur</th>
+                        <th>Email</th>
+                        <th>Rôle</th>
+                        <th>Points</th>
+                        <th>Statut</th>
+                        <th>Inscrit le</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var u in Model)
+                    {
+                        <tr>
+                            <td><strong>@u.Prenom @u.Nom</strong></td>
+                            <td style="color:var(--couleur-texte-secondaire)">@u.Email</td>
+                            <td>
+                                @* Changement de rôle *@
+                                <form asp-action="ChangerRole" asp-route-id="@u.Id" method="post"                           style="display:inline;">
+                                    @Html.AntiForgeryToken()
+                                    <select name="role" onchange="this.form.submit()"                                           style="background:var(--couleur-fond-input);
+                                        color:var(--couleur-texte);
+                                        border:1px solid var(--couleur-bordure);
+                                        border-radius:var(--arrondi-sm);
+                                        padding: 2px 6px;
+                                        font-family:var(--police-principale);
+                                        font-size:0.85rem;
+                                        cursor:pointer;">
+                                        @foreach (var role in new[] { "Acheteur", "Organisateur", "Admin", "SuperAdmin" })
+                                        {
+                                            <option value="@role" selected="@(u.Role == role)">@role</option>
+                                        }
+                                    </select>
+                                </form>
+                            </td>
+                            <td>@u.PointsFidelite pts</td>
+                            <td>
+                                <span class="badge-statut @(u.EstActif ? "badge-statut--actif" : "badge-statut--inactif")">
+                                    @(u.EstActif ? "Actif" : "Inactif")
+                                </span>
+                            </td>
+                            <td style="color:var(--couleur-texte-secondaire)">
+                                @u.DateCreation.ToString("dd/MM/yyyy")
+                            </td>
+                            <td>
+                                <form asp-action="ToggleUtilisateur" asp-route-id="@u.Id" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn-action btn-action--toggle">
+                                        @(u.EstActif ? "🚫 Désactiver" : "✅ Activer")
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

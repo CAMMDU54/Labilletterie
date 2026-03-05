@@ -1,0 +1,346 @@
+/* accueil.css
+   Styles de la page d'accueil */
+
+/* ============================================
+   HERO SECTION
+   Grande bannière avec titre et CTA
+   ============================================ */
+
+.hero {
+    position: relative;
+    min-height: 90vh;
+    /* 90% de la hauteur de l'écran */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--espace-xl) var(--espace-lg);
+    overflow: hidden;
+}
+
+/* Fond dégradé derrière le hero */
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* Couvre tout le parent */
+    background: radial-gradient(ellipse at center top,
+            rgba(76, 28, 36, 0.4) 0%,
+            rgba(0, 0, 0, 0) 70%);
+    pointer-events: none;
+    /* Ne bloque pas les clics */
+}
+
+.hero__contenu {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+}
+
+/* Badge au-dessus du titre */
+.hero__badge {
+    display: inline-block;
+    padding: var(--espace-xs) var(--espace-md);
+    background-color: var(--couleur-bordeaux-transparent);
+    border: 1px solid var(--couleur-bordeaux);
+    border-radius: var(--arrondi-lg);
+    color: var(--couleur-bordeaux-clair);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: var(--espace-lg);
+}
+
+.hero__titre {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: var(--espace-lg);
+    letter-spacing: -0.02em;
+}
+
+/* Mot mis en valeur en bordeaux */
+.hero__titre span {
+    color: var(--couleur-bordeaux-clair);
+}
+
+.hero__sous-titre {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--couleur-texte-secondaire);
+    margin-bottom: var(--espace-xl);
+    line-height: 1.7;
+}
+
+/* Groupe de boutons CTA */
+.hero__cta {
+    display: flex;
+    gap: var(--espace-md);
+    justify-content: center;
+    flex-wrap: wrap;
+    /* Passe à la ligne sur mobile */
+}
+
+.hero__cta .btn-principal {
+    width: auto;
+    /* Override le width: 100% du btn-principal global */
+    padding: var(--espace-md) var(--espace-xl);
+}
+
+/* Statistiques sous le hero */
+.hero__stats {
+    display: flex;
+    justify-content: center;
+    gap: var(--espace-xl);
+    margin-top: var(--espace-xxl);
+    flex-wrap: wrap;
+}
+
+.hero__stat {
+    text-align: center;
+}
+
+.hero__stat-nombre {
+    display: block;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--couleur-texte);
+}
+
+.hero__stat-label {
+    font-size: 0.85rem;
+    color: var(--couleur-texte-secondaire);
+}
+
+/* ============================================
+   SECTION CATÉGORIES
+   ============================================ */
+
+.section {
+    padding: var(--espace-xxl) 0;
+}
+
+.section__entete {
+    text-align: center;
+    margin-bottom: var(--espace-xl);
+}
+
+.section__entete h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin-bottom: var(--espace-sm);
+}
+
+.section__entete p {
+    color: var(--couleur-texte-secondaire);
+}
+
+/* Grille des catégories */
+.categories-grille {
+    display: grid;
+    /* Mobile : 2 colonnes, Tablette : 3, Desktop : 6 */
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--espace-md);
+}
+
+.categorie-carte {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--espace-sm);
+    padding: var(--espace-lg);
+    background-color: var(--couleur-fond-carte);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: var(--arrondi-md);
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    color: var(--couleur-texte);
+}
+
+.categorie-carte:hover {
+    border-color: var(--couleur-bordeaux);
+    background-color: var(--couleur-bordeaux-transparent);
+    transform: translateY(-4px);
+    color: var(--couleur-texte);
+}
+
+.categorie-carte__emoji {
+    font-size: 2rem;
+}
+
+.categorie-carte__nom {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* ============================================
+   SECTION ÉVÉNEMENTS (CARDS)
+   ============================================ */
+
+/* Grille des événements */
+.evenements-grille {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* Mobile : 1 colonne */
+    gap: var(--espace-lg);
+}
+
+/* Card événement */
+.evenement-carte {
+    background-color: var(--couleur-fond-carte);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: var(--arrondi-md);
+    overflow: hidden;
+    transition: var(--transition);
+    text-decoration: none;
+    color: var(--couleur-texte);
+    display: flex;
+    flex-direction: column;
+}
+
+.evenement-carte:hover {
+    border-color: var(--couleur-bordeaux);
+    transform: translateY(-4px);
+    box-shadow: var(--ombre-carte);
+    color: var(--couleur-texte);
+}
+
+/* Image de la carte */
+.evenement-carte__image {
+    width: 100%;
+    aspect-ratio: 16/9;
+    /* Ratio fixe */
+    background-color: var(--couleur-bordeaux);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    position: relative;
+}
+
+/* Badge catégorie sur l'image */
+.evenement-carte__categorie {
+    position: absolute;
+    top: var(--espace-sm);
+    left: var(--espace-sm);
+    padding: var(--espace-xs) var(--espace-sm);
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: var(--arrondi-sm);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Corps de la carte */
+.evenement-carte__corps {
+    padding: var(--espace-lg);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.evenement-carte__titre {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: var(--espace-sm);
+}
+
+.evenement-carte__meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espace-xs);
+    color: var(--couleur-texte-secondaire);
+    font-size: 0.85rem;
+    margin-bottom: var(--espace-md);
+    flex: 1;
+}
+
+.evenement-carte__meta span {
+    display: flex;
+    align-items: center;
+    gap: var(--espace-xs);
+}
+
+/* Pied de la carte : prix + places */
+.evenement-carte__pied {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--espace-md);
+    border-top: 1px solid var(--couleur-bordure);
+}
+
+.evenement-carte__prix {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--couleur-texte);
+}
+
+.evenement-carte__places {
+    font-size: 0.8rem;
+    color: var(--couleur-texte-secondaire);
+}
+
+/* Places restantes (rouge si peu) */
+.evenement-carte__places--urgent {
+    color: var(--couleur-erreur);
+    font-weight: 600;
+}
+
+/* ============================================
+   SECTION CTA BAS DE PAGE
+   ============================================ */
+
+.cta-section {
+    text-align: center;
+    padding: var(--espace-xxl) var(--espace-lg);
+    background: linear-gradient(135deg,
+            var(--couleur-fond-carte) 0%,
+            rgba(76, 28, 36, 0.1) 100%);
+    border-top: 1px solid var(--couleur-bordure);
+    border-bottom: 1px solid var(--couleur-bordure);
+}
+
+.cta-section h2 {
+    margin-bottom: var(--espace-md);
+}
+
+.cta-section p {
+    color: var(--couleur-texte-secondaire);
+    margin-bottom: var(--espace-xl);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-section .btn-principal {
+    width: auto;
+    padding: var(--espace-md) var(--espace-xl);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (min-width: 600px) {
+    .categories-grille {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .evenements-grille {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .categories-grille {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    .evenements-grille {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

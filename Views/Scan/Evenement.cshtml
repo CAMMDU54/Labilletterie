@@ -1,0 +1,394 @@
+@* Views/Scan/Evenement.cshtml *@
+@{
+    ViewData["Title"] = "Scanner les billets";
+    var evenement = ViewBag.Evenement as Labilletterie.Models.Evenement;
+    var scans = ViewBag.Scans as
+        List<Labilletterie.Models.Scan>;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/scan.css" />
+}
+
+<div style="padding: var(--espace-lg); border-bottom: 1px solid var(--couleur-bordure);
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;
+    gap: var(--espace-md);">
+    <div>
+        <h1 style="font-size:1.3rem; margin-bottom: var(--espace-xs);">
+            📱 @evenement?.Titre
+        </h1>
+        <p style="color: var(--couleur-texte-secondaire); font-size:0.9rem;">
+            📅 @evenement?.DateEvenement.ToString("dd MMMM yyyy à HH:mm")
+            · 📍 @evenement?.Lieu
+        </p>
+    </div>
+    <a href="/Scan" class="btn-secondaire">← Changer d'événement</a>
+</div>
+
+<div class="scan-interface">
+
+    @* ---- ZONE CAMÉRA ---- *@
+    <div>
+        <div class="scan-camera">
+            <div class="scan-camera__entete">
+                <h2>📷 Scanner un QR code</h2>
+                <div class="scan-statut">
+                    <div class="scan-statut__point" id="statut-point"></div>
+                    <span id="statut-texte">Caméra inactive</span>
+                </div>
+            </div>
+
+            @* Vidéo caméra *@
+            <div class="scan-video-container">
+                <video id="video-scan" autoplay playsinline style="display:none;"></video>
+                <canvas id="canvas-scan" style="display:none;"></canvas>
+
+                @* Viseur (visible quand caméra active) *@
+                <div class="scan-viseur" id="viseur" style="display:none;">
+                    <div class="scan-ligne"></div>
+                </div>
+
+                @* Placeholder initial *@
+                <div class="scan-placeholder" id="placeholder">
+                    <div class="scan-placeholder__icone">📷</div>
+                    <p>Appuyez sur "Démarrer" pour activer la caméra</p>
+                </div>
+            </div>
+
+            <div class="scan-camera__footer">
+                <button class="btn-principal" id="btn-camera"                        onclick="toggleCamera()"                        style="margin-top:0;">
+                    📷 Démarrer la caméra
+                </button>
+
+                @* Saisie manuelle du code *@
+                <div style="margin-top: var(--espace-md);">
+                    <p style="font-size:0.8rem; color:var(--couleur-texte-secondaire);
+                        margin-bottom: var(--espace-sm);">
+                        Ou saisir le code manuellement :
+                    </p>
+                    <div class="scan-manuel">
+                        <input type="text" id="input-manuel"                               placeholder="Code QR du billet..."
+                               onkeypress="if(event.key==='Enter') validerManuel()" />
+                        <button onclick="validerManuel()">Valider</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @* Résultat du scan *@
+        <div class="scan-resultat" id="scan-resultat" style="margin-top: var(--espace-lg);">
+            <div class="scan-resultat__icone" id="resultat-icone"></div>
+            <div class="scan-resultat__message" id="resultat-message"></div>
+            <div class="scan-resultat__details" id="resultat-details"></div>
+        </div>
+
+    </div>
+
+    @* ---- PANNEAU DROIT ---- *@
+    <div class="scan-panneau">
+
+        @* Stats *@
+        <div class="scan-stats">
+            <div class="scan-stat">
+                <span class="scan-stat__nombre" id="stat-scannes">
+                    @ViewBag.BilletsScannés
+                </span>
+                <span class="scan-stat__label">Entrées validées</span>
+            </div>
+            <div class="scan-stat">
+                <span class="scan-stat__nombre" id="stat-total">
+                    @ViewBag.TotalBillets
+                </span>
+                <span class="scan-stat__label">Billets total</span>
+            </div>
+        </div>
+
+        @* Journal des scans *@
+        <div class="scan-journal">
+            <div class="scan-journal__entete">
+                <span>Journal des scans</span>
+                <span style="font-size:0.75rem; color:var(--couleur-texte-secondaire);">
+                    Mise à jour auto
+                </span>
+            </div>
+            <ul class="scan-journal__liste" id="journal-liste">
+                @if (scans != null && scans.Any())
+                {
+                    @foreach (var scan in scans)
+                    {
+                        <li class="scan-journal__item">
+                            <div class="scan-journal__point
+                                @(scan.Resultat == "Validé" ? "scan-journal__point--valide" :
+                                                                   scan.Resultat == "DéjàScanné" ? "scan-journal__point--double" :
+                                                                   "scan-journal__point--refuse")">
+                            </div>
+                            <div class="scan-journal__info">
+                                <div class="scan-journal__nom">
+                                    @scan.Billet?.Acheteur?.Prenom
+                                    @scan.Billet?.Acheteur?.Nom
+                                </div>
+                                <div class="scan-journal__type">
+                                    @scan.Billet?.TypeBillet · @scan.Resultat
+                                </div>
+                            </div>
+                            <div class="scan-journal__heure">
+                                @scan.DateScan.ToString("HH:mm:ss")
+                            </div>
+                        </li>
+                    }
+                }
+                else
+                {
+                    <li style="padding: var(--espace-xl); text-align:center;
+                        color: var(--couleur-texte-secondaire); font-size:0.85rem;">
+                        Aucun scan pour le moment
+                    </li>
+                }
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+@* ============================================================
+   JAVASCRIPT — Caméra + Scan QR + Journal temps réel
+   ============================================================ *@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js"></script>
+
+<script>
+    // ---- Variables globales ----
+    const evenementId = @evenement?.Id;
+    let cameraActive = false;
+    let scanInterval = null;
+    let journalInterval = null;
+    let dernierCode = '';
+    let dernierScanTime = 0;
+
+    // ---- Éléments DOM ----
+    const video = document.getElementById('video-scan');
+    const canvas = document.getElementById('canvas-scan');
+    const ctx = canvas.getContext('2d');
+    const placeholder = document.getElementById('placeholder');
+    const viseur = document.getElementById('viseur');
+    const btnCamera = document.getElementById('btn-camera');
+    const statutPoint = document.getElementById('statut-point');
+    const statutTexte = document.getElementById('statut-texte');
+
+    // ---- Démarrer / Arrêter la caméra ----
+    async function toggleCamera() {
+    if (cameraActive) {
+    arreterCamera();
+    } else {
+    await demarrerCamera();
+    }
+    }
+
+    async function demarrerCamera() {
+    try {
+    // Demande l'accès à la caméra arrière (environnement)
+    const stream = await navigator.mediaDevices.getUserMedia({
+    video: { facingMode: 'environment' }
+    });
+
+    video.srcObject = stream;
+    video.style.display = 'block';
+    placeholder.style.display = 'none';
+    viseur.style.display = 'block';
+
+    // Mise à jour du statut
+    cameraActive = true;
+    statutPoint.classList.add('scan-statut__point--actif');
+    statutTexte.textContent = 'Caméra active';
+    btnCamera.textContent = '⏹️ Arrêter la caméra';
+
+    // Démarre la lecture des QR codes toutes les 300ms
+    scanInterval = setInterval(lireQrCode, 300);
+
+    } catch (err) {
+    afficherResultat('rouge', '❌',
+    'Caméra inaccessible',
+    'Vérifiez les permissions de caméra dans votre navigateur');
+    }
+    }
+
+    function arreterCamera() {
+    const stream = video.srcObject;
+    if (stream) {
+    stream.getTracks().forEach(track => track.stop());
+    }
+
+    video.style.display = 'none';
+    placeholder.style.display = 'flex';
+    viseur.style.display = 'none';
+
+    cameraActive = false;
+    statutPoint.classList.remove('scan-statut__point--actif');
+    statutTexte.textContent = 'Caméra inactive';
+    btnCamera.textContent = '📷 Démarrer la caméra';
+
+    clearInterval(scanInterval);
+    }
+
+    // ---- Lecture du QR code depuis la vidéo ----
+    function lireQrCode() {
+    if (!video.videoWidth) return; // Vidéo pas encore chargée
+
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    ctx.drawImage(video, 0, 0);
+
+    // Analyse l'image avec jsQR
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const code = jsQR(imageData.data, imageData.width, imageData.height);
+
+    if (code) {
+    const now = Date.now();
+    // Évite de scanner le même code plusieurs fois en 3 secondes
+    if (code.data !== dernierCode || now - dernierScanTime > 3000) {
+    dernierCode = code.data;
+    dernierScanTime = now;
+    envoyerScan(code.data);
+    }
+    }
+    }
+
+    // ---- Validation manuelle ----
+    function validerManuel() {
+    const input = document.getElementById('input-manuel');
+    const code = input.value.trim();
+    if (code) {
+    envoyerScan(code);
+    input.value = '';
+    }
+    }
+
+    // ---- Envoyer le scan au serveur ----
+    async function envoyerScan(codeQR) {
+    try {
+    const response = await fetch('/Scan/Valider', {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json',
+    // Token anti-CSRF
+    'RequestVerificationToken': document
+    .querySelector('input[name="__RequestVerificationToken"]')
+    ?.value ?? ''
+    },
+    body: JSON.stringify({
+    codeQR: codeQR,
+    evenementId: evenementId
+    })
+    });
+
+    const data = await response.json();
+
+    // Affiche le résultat
+    const icone = data.couleur === 'vert' ? '✅' :
+    data.couleur === 'orange' ? '⚠️' : '❌';
+
+    afficherResultat(
+    data.couleur,
+    icone,
+    data.message,
+    data.acheteur ? `${data.acheteur} · ${data.typeBillet}` : ''
+    );
+
+    // Met à jour le journal
+    rafraichirJournal();
+
+    // Met à jour le compteur si entrée validée
+    if (data.succes) {
+    const stat = document.getElementById('stat-scannes');
+    stat.textContent = parseInt(stat.textContent) + 1;
+    }
+
+    } catch (err) {
+    afficherResultat('rouge', '❌', 'Erreur de connexion', '');
+    }
+    }
+
+    // ---- Afficher le résultat ----
+    function afficherResultat(couleur, icone, message, details) {
+    const bloc = document.getElementById('scan-resultat');
+    const blocIcone = document.getElementById('resultat-icone');
+    const blocMessage = document.getElementById('resultat-message');
+    const blocDetails = document.getElementById('resultat-details');
+
+    // Retire toutes les classes de couleur
+    bloc.classList.remove(
+    'scan-resultat--vert',
+    'scan-resultat--orange',
+    'scan-resultat--rouge'
+    );
+
+    // Ajoute la bonne classe
+    bloc.classList.add(`scan-resultat--${couleur}`);
+
+    blocIcone.textContent = icone;
+    blocMessage.textContent = message;
+    blocDetails.textContent = details;
+
+    // Cache le résultat après 4 secondes
+    setTimeout(() => {
+    bloc.classList.remove(
+    'scan-resultat--vert',
+    'scan-resultat--orange',
+    'scan-resultat--rouge'
+    );
+    }, 4000);
+    }
+
+    // ---- Rafraîchir le journal en temps réel ----
+    async function rafraichirJournal() {
+    try {
+    const response = await fetch(`/Scan/Journal/${evenementId}`);
+    const scans = await response.json();
+
+    const liste = document.getElementById('journal-liste');
+    liste.innerHTML = '';
+
+    if (scans.length === 0) {
+    liste.innerHTML = `<li style="padding: var(--espace-xl);
+    text-align:center; color: var(--couleur-texte-secondaire);
+    font-size:0.85rem;">Aucun scan pour le moment</li>`;
+    return;
+    }
+
+    scans.forEach(scan => {
+    const couleurPoint =
+    scan.resultat === 'Validé' ? 'scan-journal__point--valide' :
+    scan.resultat === 'DéjàScanné' ? 'scan-journal__point--double' :
+    'scan-journal__point--refuse';
+
+    liste.innerHTML += `
+    <li class="scan-journal__item">
+    <div class="scan-journal__point ${couleurPoint}"></div>
+    <div class="scan-journal__info">
+    <div class="scan-journal__nom">${scan.acheteur}</div>
+    <div class="scan-journal__type">
+    ${scan.typeBillet} · ${scan.resultat}
+    </div>
+    </div>
+    <div class="scan-journal__heure">${scan.heure}</div>
+    </li>`;
+    });
+
+    } catch (err) {
+    console.error('Erreur journal:', err);
+    }
+    }
+
+    // ---- Token CSRF pour les requêtes POST ----
+    // On l'ajoute dans un champ caché
+    document.addEventListener('DOMContentLoaded', () => {
+    const form = document.createElement('form');
+    form.innerHTML = '@Html.AntiForgeryToken()';
+    document.body.appendChild(form);
+
+    // Rafraîchit le journal toutes les 10 secondes
+    journalInterval = setInterval(rafraichirJournal, 10000);
+    });
+
+    // Arrête la caméra si on quitte la page
+    window.addEventListener('beforeunload', arreterCamera);
+</script>

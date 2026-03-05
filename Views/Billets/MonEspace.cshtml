@@ -1,0 +1,93 @@
+@* Views/Billets/MonEspace.cshtml *@
+@model List<Labilletterie.Models.Billet>
+
+@{
+    ViewData["Title"] = "Mon espace";
+    var utilisateur = ViewBag.Utilisateur as Labilletterie.Models.Utilisateur;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/billets.css" />
+}
+
+<div class="espace-container">
+
+    <h1 style="margin-bottom: var(--espace-xl);">Mon espace</h1>
+
+    @* Carte profil *@
+    @if (utilisateur != null)
+    {
+        <div class="profil-carte">
+            <div class="profil-carte__avatar">👤</div>
+            <div class="profil-carte__info">
+                <h2>@utilisateur.Prenom @utilisateur.Nom</h2>
+                <p>@utilisateur.Email</p>
+                <p style="margin-top: var(--espace-xs);">
+                    <span style="color: var(--couleur-bordeaux-clair); font-weight:600;">
+                        @utilisateur.Role
+                    </span>
+                    · Membre depuis @utilisateur.DateCreation.ToString("MMMM yyyy")
+                </p>
+            </div>
+            <div class="profil-carte__points">
+                <span class="nombre">@utilisateur.PointsFidelite</span>
+                <span class="label">Points fidélité</span>
+            </div>
+        </div>
+    }
+
+    @* Historique des billets *@
+    <h2 style="margin-bottom: var(--espace-lg);">
+        Mes billets (@Model.Count)
+    </h2>
+
+    @if (Model.Any())
+    {
+        @foreach (var billet in Model)
+        {
+            <div class="historique-billet">
+                <div class="historique-billet__emoji">🎟️</div>
+                <div class="historique-billet__info">
+                    <div class="historique-billet__titre">
+                        @billet.Evenement?.Titre
+                    </div>
+                    <div class="historique-billet__meta">
+                        📅 @billet.Evenement?.DateEvenement.ToString("dd MMM yyyy")
+                        · @billet.TypeBillet
+                        · @(billet.PrixPaye == 0 ? "Gratuit" : billet.PrixPaye.ToString("0.00") + " €")
+                        ·
+                        @if (billet.StatutScan == "Validé")
+                        {
+                            <span style="color: var(--couleur-succes);">✅ Utilisé</span>
+                        }
+                        else
+                        {
+                            <span style="color: orange;">⏳ Non scanné</span>
+                        }
+                    </div>
+                </div>
+                <div class="historique-billet__actions">
+                    <a href="/Billets/MonBillet/@billet.Id"        class="btn-secondaire">
+                        Voir
+                    </a>
+                    <a href="/Billets/Telecharger/@billet.Id"  class="btn-secondaire">
+                        📥 PDF
+                    </a>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div style="text-align:center; padding: var(--espace-xxl);
+            color: var(--couleur-texte-secondaire);">
+            <p style="font-size: 3rem;">🎟️</p>
+            <p>Vous n'avez pas encore de billet.</p>
+            <a href="/Evenements" class="btn-principal" style="width:auto; display:inline-block;
+                margin-top: var(--espace-lg);">
+                Découvrir les événements
+            </a>
+        </div>
+    }
+
+</div>

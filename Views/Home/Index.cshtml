@@ -1,8 +1,174 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@* Views/Home/Index.cshtml *@
+@model List<Labilletterie.Models.Evenement>
+
+@{
+    ViewData["Title"] = "Accueil";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@* Lien vers le CSS spécifique à cette page *@
+@section Styles {
+    <link rel="stylesheet" href="~/css/accueil.css" />
+}
+
+<!-- ============================================
+     HERO SECTION
+     ============================================ -->
+<section class="hero">
+    <div class="hero__contenu">
+
+        <span class="hero__badge">🎟️ Plateforme de billetterie premium</span>
+
+        <h1 class="hero__titre">
+            Vivez des <span>expériences</span><br />inoubliables
+        </h1>
+
+        <p class="hero__sous-titre">
+            Concerts, soirées, festivals, spectacles...<br />
+            Trouvez et réservez vos billets en quelques clics.
+        </p>
+
+        <div class="hero__cta">
+            <a href="/Evenements" class="btn-principal">
+                Découvrir les événements
+            </a>
+            <a href="/Compte/Inscription" class="btn-secondaire">
+                Créer un compte gratuit
+            </a>
+        </div>
+
+        <div class="hero__stats">
+            <div class="hero__stat">
+                <span class="hero__stat-nombre">500+</span>
+                <span class="hero__stat-label">Événements</span>
+            </div>
+            <div class="hero__stat">
+                <span class="hero__stat-nombre">50k+</span>
+                <span class="hero__stat-label">Billets vendus</span>
+            </div>
+            <div class="hero__stat">
+                <span class="hero__stat-nombre">200+</span>
+                <span class="hero__stat-label">Organisateurs</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ============================================
+     SECTION CATÉGORIES
+     ============================================ -->
+<section class="section">
+    <div class="container">
+
+        <div class="section__entete">
+            <h2>Explorer par catégorie</h2>
+            <p>Trouvez l'événement qui vous correspond</p>
+        </div>
+
+        <div class="categories-grille">
+            <a href="/Evenements?categorie=Concert" class="categorie-carte">
+                <span class="categorie-carte__emoji">🎵</span>
+                <span class="categorie-carte__nom">Concerts</span>
+            </a>
+            <a href="/Evenements?categorie=Soirée" class="categorie-carte">
+                <span class="categorie-carte__emoji">🎉</span>
+                <span class="categorie-carte__nom">Soirées</span>
+            </a>
+            <a href="/Evenements?categorie=Festival" class="categorie-carte">
+                <span class="categorie-carte__emoji">🎪</span>
+                <span class="categorie-carte__nom">Festivals</span>
+            </a>
+            <a href="/Evenements?categorie=Spectacle" class="categorie-carte">
+                <span class="categorie-carte__emoji">🎭</span>
+                <span class="categorie-carte__nom">Spectacles</span>
+            </a>
+            <a href="/Evenements?categorie=Formation" class="categorie-carte">
+                <span class="categorie-carte__emoji">📚</span>
+                <span class="categorie-carte__nom">Formations</span>
+            </a>
+            <a href="/Evenements?categorie=Convention" class="categorie-carte">
+                <span class="categorie-carte__emoji">🎮</span>
+                <span class="categorie-carte__nom">Conventions</span>
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<!-- ============================================
+     SECTION ÉVÉNEMENTS
+     ============================================ -->
+<section class="section" style="padding-top: 0;">
+    <div class="container">
+
+        <div class="section__entete">
+            <h2>Événements à venir</h2>
+            <p>Les prochains événements disponibles</p>
+        </div>
+
+        @* Si des événements existent en base *@
+        @if (Model != null && Model.Any())
+        {
+            <div class="evenements-grille">
+                @foreach (var evt in Model)
+                {
+                    <a asp-controller="Evenements" asp-action="Detail" asp-route-id="@evt.Id" class="evenement-carte">
+                        <div class="evenement-carte__image">
+                            🎟️
+                            <span class="evenement-carte__categorie">@evt.Categorie</span>
+                        </div>
+                        <div class="evenement-carte__corps">
+                            <h3 class="evenement-carte__titre">@evt.Titre</h3>
+                            <div class="evenement-carte__meta">
+                                <span>📅 @evt.DateEvenement.ToString("dd MMMM yyyy")</span>
+                                <span>📍 @evt.Lieu</span>
+                                @if (evt.Organisateur != null)
+                                {
+                                    <span>👤 @evt.Organisateur.Prenom @evt.Organisateur.Nom</span>
+                                }
+                            </div>
+                            <div class="evenement-carte__pied">
+                                <span class="evenement-carte__prix">
+                                    @(evt.PrixBase == 0 ? "Gratuit" : evt.PrixBase.ToString("0.00") + " €")
+                                </span>
+                                <span
+                                    class="evenement-carte__places @(evt.NombrePlacesRestantes < 20 ? "evenement-carte__places--urgent" : "")">
+                                    @(evt.NombrePlacesRestantes < 20
+                                    ? $"⚡ {evt.NombrePlacesRestantes} places restantes"
+                                    : $"{evt.NombrePlacesRestantes} places")
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+        }
+        else
+        {
+            @* Message si aucun événement en base *@
+            <div style="text-align:center; padding: var(--espace-xxl); color: var(--couleur-texte-secondaire);">
+                <p style="font-size: 3rem;">🎟️</p>
+                <p>Aucun événement disponible pour le moment.</p>
+                <p>Revenez bientôt !</p>
+            </div>
+        }
+
+        <div style="text-align:center; margin-top: var(--espace-xl);">
+            <a href="/Evenements" class="btn-secondaire">
+                Voir tous les événements →
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<!-- ============================================
+     SECTION CTA ORGANISATEUR
+     ============================================ -->
+<section class="cta-section">
+    <h2>Vous organisez un événement ?</h2>
+    <p>Créez votre espace organisateur et vendez vos billets en quelques minutes.</p>
+    <a href="/Compte/Inscription" class="btn-principal">
+        Devenir organisateur
+    </a>
+</section>

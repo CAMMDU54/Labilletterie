@@ -1,0 +1,222 @@
+/* evenements.css */
+
+/* ---- Barre de recherche & filtres ---- */
+.filtres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espace-md);
+    margin-bottom: var(--espace-xl);
+    align-items: center;
+}
+
+.filtres__recherche {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    gap: var(--espace-sm);
+}
+
+.filtres__recherche input {
+    flex: 1;
+    padding: var(--espace-md);
+    background-color: var(--couleur-fond-input);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: var(--arrondi-sm);
+    color: var(--couleur-texte);
+    font-family: var(--police-principale);
+    font-size: 1rem;
+    outline: none;
+    transition: var(--transition);
+}
+
+.filtres__recherche input:focus {
+    border-color: var(--couleur-bordeaux-clair);
+}
+
+.filtres__recherche button {
+    padding: var(--espace-md) var(--espace-lg);
+    background-color: var(--couleur-bordeaux);
+    color: var(--couleur-texte);
+    border: none;
+    border-radius: var(--arrondi-sm);
+    cursor: pointer;
+    font-family: var(--police-principale);
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.filtres__recherche button:hover {
+    background-color: var(--couleur-bordeaux-clair);
+}
+
+/* Boutons de filtre catégorie */
+.filtres__categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espace-sm);
+}
+
+.filtre-btn {
+    padding: var(--espace-xs) var(--espace-md);
+    background-color: var(--couleur-fond-carte);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: var(--arrondi-lg);
+    color: var(--couleur-texte-secondaire);
+    font-family: var(--police-principale);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.filtre-btn:hover,
+.filtre-btn--actif {
+    border-color: var(--couleur-bordeaux);
+    color: var(--couleur-bordeaux-clair);
+    background-color: var(--couleur-bordeaux-transparent);
+}
+
+/* ---- Page détail événement ---- */
+.detail-evenement {
+    max-width: 900px;
+    margin: var(--espace-xl) auto;
+    padding: 0 var(--espace-lg);
+}
+
+.detail-evenement__entete {
+    margin-bottom: var(--espace-xl);
+}
+
+.detail-evenement__badge {
+    display: inline-block;
+    padding: var(--espace-xs) var(--espace-md);
+    background-color: var(--couleur-bordeaux-transparent);
+    border: 1px solid var(--couleur-bordeaux);
+    border-radius: var(--arrondi-lg);
+    color: var(--couleur-bordeaux-clair);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: var(--espace-md);
+}
+
+.detail-evenement__titre {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    margin-bottom: var(--espace-lg);
+}
+
+.detail-evenement__infos {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--espace-xl);
+}
+
+.detail-evenement__description {
+    color: var(--couleur-texte-secondaire);
+    line-height: 1.8;
+}
+
+/* Bloc achat */
+.detail-evenement__achat {
+    background-color: var(--couleur-fond-carte);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: var(--arrondi-md);
+    padding: var(--espace-xl);
+    position: sticky;
+    top: 80px;
+    /* Reste visible lors du scroll */
+}
+
+.detail-evenement__prix-total {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: var(--espace-md);
+}
+
+.detail-evenement__meta-liste {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--espace-md);
+    margin-bottom: var(--espace-xl);
+    padding-bottom: var(--espace-xl);
+    border-bottom: 1px solid var(--couleur-bordure);
+}
+
+.detail-evenement__meta-liste li {
+    display: flex;
+    align-items: center;
+    gap: var(--espace-md);
+    color: var(--couleur-texte-secondaire);
+    font-size: 0.95rem;
+}
+
+.detail-evenement__meta-liste li strong {
+    color: var(--couleur-texte);
+}
+
+/* Message succès */
+.message-succes {
+    background-color: rgba(46, 204, 113, 0.1);
+    border: 1px solid var(--couleur-succes);
+    border-radius: var(--arrondi-sm);
+    padding: var(--espace-md);
+    color: var(--couleur-succes);
+    margin-bottom: var(--espace-lg);
+}
+
+/* ---- Formulaire création événement ---- */
+.form-creation {
+    max-width: 700px;
+    margin: var(--espace-xl) auto;
+    padding: var(--espace-xl);
+    background-color: var(--couleur-fond-carte);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: var(--arrondi-md);
+}
+
+.form-creation h1 {
+    margin-bottom: var(--espace-xl);
+}
+
+.form-grille {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--espace-md);
+}
+
+.form-groupe textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: var(--espace-md);
+    background-color: var(--couleur-fond-input);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: var(--arrondi-sm);
+    color: var(--couleur-texte);
+    font-family: var(--police-principale);
+    font-size: 1rem;
+    resize: vertical;
+    outline: none;
+    transition: var(--transition);
+}
+
+.form-groupe textarea:focus {
+    border-color: var(--couleur-bordeaux-clair);
+    box-shadow: 0 0 0 3px var(--couleur-bordeaux-transparent);
+}
+
+/* ---- Responsive ---- */
+@media (min-width: 768px) {
+    .detail-evenement__infos {
+        grid-template-columns: 1fr 340px;
+    }
+
+    .form-grille {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .form-grille .form-groupe--pleine-largeur {
+        grid-column: 1 / -1;
+        /* Occupe les 2 colonnes */
+    }
+}

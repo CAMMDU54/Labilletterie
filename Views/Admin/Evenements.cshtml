@@ -1,0 +1,116 @@
+@* Views/Admin/Evenements.cshtml *@
+@model List<Labilletterie.Models.Evenement>
+
+@{
+    ViewData["Title"] = "Gestion des événements";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin.css" />
+}
+
+<div class="dashboard">
+
+    <aside class="dashboard__sidebar">
+        <p class="sidebar__titre">Administration</p>
+        <a href="/Admin" class="sidebar__lien">🏠 Tableau de bord</a>
+        <a href="/Admin/Evenements" class="sidebar__lien sidebar__lien--actif">🎭 Événements</a>
+        <a href="/Admin/Utilisateurs" class="sidebar__lien">👥 Utilisateurs</a>
+    </aside>
+
+    <div class="dashboard__contenu">
+
+        <div class="dashboard__entete">
+            <h1>Gestion des événements</h1>
+        </div>
+
+        @if (TempData["Succes"] != null)
+        {
+            <div class="flash-succes">✅ @TempData["Succes"]</div>
+        }
+        @if (TempData["Erreur"] != null)
+        {
+            <div class="flash-erreur">❌ @TempData["Erreur"]</div>
+        }
+
+        @* Filtres par statut *@
+        <div style="display:flex; gap: var(--espace-sm); margin-bottom: var(--espace-lg); flex-wrap:wrap;">
+            @foreach (var s in new[] { "", "EnAttente", "Validé", "Refusé" })
+            {
+                var label = s switch
+                {
+                    "EnAttente" => "⏳ En attente",
+                    "Validé" => "✅ Validés",
+                    "Refusé" => "❌ Refusés",
+                    _ => "Tous"
+                };
+                <a href="/Admin/Evenements@(s != "" ? "?statut=" + s : "")"
+                       class="filtre-btn @(ViewBag.StatutFiltre == (s == "" ? null : s) ? "filtre-btn--actif" : "")">
+                    @label
+                </a>
+            }
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Événement</th>
+                        <th>Organisateur</th>
+                        <th>Date</th>
+                        <th>Places</th>
+                        <th>Prix</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var evt in Model)
+                    {
+                        <tr>
+                            <td>
+                                <strong>@evt.Titre</strong><br />
+                                <small style="color:var(--couleur-texte-secondaire)">@evt.Categorie</small>
+                            </td>
+                            <td>@evt.Organisateur?.Prenom @evt.Organisateur?.Nom</td>
+                            <td>@evt.DateEvenement.ToString("dd/MM/yyyy")</td>
+                            <td>@evt.NombrePlacesRestantes / @evt.NombrePlacesTotal</td>
+                            <td>@evt.PrixBase.ToString("0.00") €</td>
+                            <td>
+                                @{
+                                    var classeStatut = evt.Statut switch
+                                    {
+                                        "Validé" => "badge-statut--valide",
+                                        "EnAttente" => "badge-statut--attente",
+                                        "Refusé" => "badge-statut--refuse",
+                                        _ => ""
+                                    };
+                                }
+                                <span class="badge-statut @classeStatut">@evt.Statut</span>
+                            </td>
+                            <td>
+                                <div style="display:flex; gap: var(--espace-xs);">
+                                    @if (evt.Statut != "Validé")
+                                    {
+                                        <form asp-action="Valider" asp-route-id="@evt.Id" method="post">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="btn-action btn-action--valider">✅</button>
+                                        </form>
+                                    }
+                                    @if (evt.Statut != "Refusé")
+                                    {
+                                        <form asp-action="Refuser" asp-route-id="@evt.Id" method="post">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="btn-action btn-action--refuser">❌</button>
+                                        </form>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

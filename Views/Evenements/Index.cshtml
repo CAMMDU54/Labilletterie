@@ -1,0 +1,97 @@
+@* Views/Evenements/Index.cshtml *@
+@model List<Labilletterie.Models.Evenement>
+
+@{
+    ViewData["Title"] = "Événements";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/accueil.css" />
+    <link rel="stylesheet" href="~/css/evenements.css" />
+}
+
+<div class="container" style="padding-top: var(--espace-xl);">
+
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: var(--espace-xl); flex-wrap:wrap; gap: var(--espace-md);">
+        <h1>Tous les événements</h1>
+        @if (User.IsInRole("Organisateur") || User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
+        {
+            <a href="/Evenements/Creer" class="btn-principal" style="width:auto; padding: var(--espace-sm) var(--espace-lg);">
+                + Créer un événement
+            </a>
+        }
+    </div>
+
+    @* Barre de recherche *@
+    <form method="get" action="/Evenements">
+        <div class="filtres">
+            <div class="filtres__recherche">
+                <input type="text" name="recherche"
+                       value="@ViewBag.Recherche"
+                       placeholder="Rechercher un événement, un lieu..." />
+                <button type="submit">Rechercher</button>
+            </div>
+        </div>
+
+        @* Filtres catégories *@
+        <div class="filtres__categories" style="margin-bottom: var(--espace-xl);">
+            <a href="/Evenements" class="filtre-btn @(ViewBag.Categorie == null ? "filtre-btn--actif" : "")">
+                Tous
+            </a>
+            @foreach (var cat in new[] { "Concert", "Soirée", "Festival", "Spectacle", "Formation", "Convention" })
+            {
+                <a href="/Evenements?categorie=@cat"
+                   class="filtre-btn @(ViewBag.Categorie == cat ? "filtre-btn--actif" : "")">
+                    @cat
+                </a>
+            }
+        </div>
+    </form>
+
+    @* Liste des événements *@
+    @if (Model != null && Model.Any())
+    {
+        <div class="evenements-grille">
+            @foreach (var evt in Model)
+            {
+                <a href="/Evenements/@evt.Id" class="evenement-carte">
+                    <div class="evenement-carte__image">
+                        🎟️
+                        <span class="evenement-carte__categorie">@evt.Categorie</span>
+                    </div>
+                    <div class="evenement-carte__corps">
+                        <h3 class="evenement-carte__titre">@evt.Titre</h3>
+                        <div class="evenement-carte__meta">
+                            <span>📅 @evt.DateEvenement.ToString("dd MMMM yyyy à HH:mm")</span>
+                            <span>📍 @evt.Lieu</span>
+                        </div>
+                        <div class="evenement-carte__pied">
+                            <span class="evenement-carte__prix">
+                                @(evt.PrixBase == 0 ? "Gratuit" : evt.PrixBase.ToString("0.00") + " €")
+                            </span>
+                            <span class="evenement-carte__places @(evt.NombrePlacesRestantes < 20 ? "evenement-carte__places--urgent" : "")">
+                                @(evt.NombrePlacesRestantes < 20
+                                    ? $"⚡ {evt.NombrePlacesRestantes} places"
+                                    : $"{evt.NombrePlacesRestantes} places")
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+    }
+    else
+    {
+        <div style="text-align:center; padding: var(--espace-xxl); color: var(--couleur-texte-secondaire);">
+            <p style="font-size: 3rem;">🔍</p>
+            <p>Aucun événement trouvé.</p>
+            @if (ViewBag.Recherche != null || ViewBag.Categorie != null)
+            {
+                <a href="/Evenements" class="btn-secondaire" style="margin-top: var(--espace-md); display:inline-block;">
+                    Effacer les filtres
+                </a>
+            }
+        </div>
+    }
+
+</div>

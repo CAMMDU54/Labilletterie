@@ -1,0 +1,73 @@
+@* Views/Billets/MonBillet.cshtml *@
+@model Labilletterie.Models.Billet
+
+@{
+    ViewData["Title"] = "Mon billet";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/billets.css" />
+}
+
+<div class="billet-container">
+
+    <div class="message-succes" style="margin-bottom: var(--espace-xl);">
+        🎉 Votre billet a bien été confirmé !
+    </div>
+
+    <div class="billet-card">
+
+        <div class="billet-card__entete">
+            <h1>@Model.Evenement?.Titre</h1>
+            <p>@Model.Evenement?.DateEvenement.ToString("dddd dd MMMM yyyy à HH:mm")</p>
+            <p>📍 @Model.Evenement?.Lieu</p>
+        </div>
+
+        <div class="billet-card__corps">
+
+            @* QR Code *@
+            <div class="qr-code">
+                <img src="data:image/png;base64,@ViewBag.QrCodeBase64" alt="QR Code billet" />
+            </div>
+
+            <p class="billet-card__ref">
+                Réf : @Model.CodeQR[..8].ToUpper()
+            </p>
+
+            <ul class="billet-card__infos">
+                <li>
+                    <span>Titulaire</span>
+                    <span>@Model.Acheteur?.Prenom @Model.Acheteur?.Nom</span>
+                </li>
+                <li>
+                    <span>Type</span>
+                    <span>@Model.TypeBillet</span>
+                </li>
+                <li>
+                    <span>Prix payé</span>
+                    <span>@(Model.PrixPaye == 0 ? "Gratuit" : Model.PrixPaye.ToString("0.00") + " €")</span>
+                </li>
+                <li>
+                    <span>Statut</span>
+                    <span style="color: var(--couleur-succes);">✅ Valide</span>
+                </li>
+                <li>
+                    <span>Date d'achat</span>
+                    <span>@Model.DateAchat.ToString("dd/MM/yyyy à HH:mm")</span>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+    @* Boutons d'action *@
+    <div style="display:flex; gap: var(--espace-md); justify-content:center; flex-wrap:wrap;">
+        <a href="/Billets/Telecharger/@Model.Id" class="btn-principal" style="width:auto;">
+            📥 Télécharger le PDF
+        </a>
+        <a href="/Billets/MonEspace" class="btn-secondaire">
+            Mes billets →
+        </a>
+    </div>
+
+</div>

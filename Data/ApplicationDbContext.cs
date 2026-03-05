@@ -17,5 +17,6 @@ namespace Labilletterie.Data
         public DbSet<Utilisateur> Utilisateurs { get; set; }
         public DbSet<Evenement> Evenements { get; set; }
         public DbSet<Billet> Billets { get; set; }
+        public DbSet<Scan> Scans { get; set; }
     }
 }

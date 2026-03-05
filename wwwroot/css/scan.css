@@ -1,0 +1,397 @@
+/* scan.css
+   Interface de scan QR pour organisateurs */
+
+/* ---- Page de sélection d'événement ---- */
+.scan-container {
+    max-width: 800px;
+    margin: var(--espace-xl) auto;
+    padding: 0 var(--espace-lg);
+}
+
+.scan-container h1 {
+    margin-bottom: var(--espace-sm);
+}
+
+.scan-container .sous-titre {
+    color: var(--couleur-texte-secondaire);
+    margin-bottom: var(--espace-xl);
+}
+
+/* ---- Interface de scan principale ---- */
+.scan-interface {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--espace-xl);
+    max-width: 1000px;
+    margin: var(--espace-xl) auto;
+    padding: 0 var(--espace-lg);
+}
+
+/* Zone caméra */
+.scan-camera {
+    background-color: var(--couleur-fond-carte);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: var(--arrondi-md);
+    overflow: hidden;
+}
+
+.scan-camera__entete {
+    padding: var(--espace-lg);
+    border-bottom: 1px solid var(--couleur-bordure);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.scan-camera__entete h2 {
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
+/* Indicateur de statut caméra */
+.scan-statut {
+    display: flex;
+    align-items: center;
+    gap: var(--espace-sm);
+    font-size: 0.85rem;
+    color: var(--couleur-texte-secondaire);
+}
+
+.scan-statut__point {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--couleur-erreur);
+    animation: none;
+}
+
+.scan-statut__point--actif {
+    background-color: var(--couleur-succes);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(0.8);
+    }
+}
+
+/* Conteneur vidéo */
+.scan-video-container {
+    position: relative;
+    background-color: #000;
+    aspect-ratio: 4/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#video-scan {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Viseur de scan */
+.scan-viseur {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border: 2px solid var(--couleur-bordeaux-clair);
+    border-radius: var(--arrondi-sm);
+    pointer-events: none;
+}
+
+/* Coins du viseur */
+.scan-viseur::before,
+.scan-viseur::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: white;
+    border-style: solid;
+}
+
+.scan-viseur::before {
+    top: -2px;
+    left: -2px;
+    border-width: 3px 0 0 3px;
+    border-radius: 4px 0 0 0;
+}
+
+.scan-viseur::after {
+    bottom: -2px;
+    right: -2px;
+    border-width: 0 3px 3px 0;
+    border-radius: 0 0 4px 0;
+}
+
+/* Ligne de scan animée */
+.scan-ligne {
+    position: absolute;
+    width: 190px;
+    height: 2px;
+    background: linear-gradient(90deg,
+            transparent, var(--couleur-bordeaux-clair), transparent);
+    animation: scanner 2s infinite;
+}
+
+@keyframes scanner {
+    0% {
+        top: 10px;
+    }
+
+    100% {
+        top: 185px;
+    }
+}
+
+/* Placeholder quand caméra inactive */
+.scan-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--espace-md);
+    color: var(--couleur-texte-secondaire);
+    padding: var(--espace-xxl);
+}
+
+.scan-placeholder__icone {
+    font-size: 4rem;
+    opacity: 0.3;
+}
+
+/* Bouton démarrer caméra */
+.scan-camera__footer {
+    padding: var(--espace-lg);
+    border-top: 1px solid var(--couleur-bordure);
+}
+
+/* Saisie manuelle */
+.scan-manuel {
+    display: flex;
+    gap: var(--espace-sm);
+    margin-top: var(--espace-md);
+}
+
+.scan-manuel input {
+    flex: 1;
+    padding: var(--espace-md);
+    background-color: var(--couleur-fond-input);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: var(--arrondi-sm);
+    color: var(--couleur-texte);
+    font-family: var(--police-principale);
+    outline: none;
+    transition: var(--transition);
+}
+
+.scan-manuel input:focus {
+    border-color: var(--couleur-bordeaux-clair);
+}
+
+.scan-manuel button {
+    padding: var(--espace-md) var(--espace-lg);
+    background-color: var(--couleur-bordeaux);
+    color: white;
+    border: none;
+    border-radius: var(--arrondi-sm);
+    cursor: pointer;
+    font-family: var(--police-principale);
+    font-weight: 600;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.scan-manuel button:hover {
+    background-color: var(--couleur-bordeaux-clair);
+}
+
+/* ---- Résultat du scan ---- */
+.scan-resultat {
+    display: none;
+    /* Caché par défaut */
+    padding: var(--espace-xl);
+    border-radius: var(--arrondi-md);
+    text-align: center;
+    border: 2px solid;
+    transition: var(--transition);
+}
+
+.scan-resultat--vert {
+    display: block;
+    background-color: rgba(46, 204, 113, 0.1);
+    border-color: var(--couleur-succes);
+    color: var(--couleur-succes);
+}
+
+.scan-resultat--orange {
+    display: block;
+    background-color: rgba(255, 165, 0, 0.1);
+    border-color: orange;
+    color: orange;
+}
+
+.scan-resultat--rouge {
+    display: block;
+    background-color: rgba(231, 76, 60, 0.1);
+    border-color: var(--couleur-erreur);
+    color: var(--couleur-erreur);
+}
+
+.scan-resultat__icone {
+    font-size: 3rem;
+    margin-bottom: var(--espace-sm);
+}
+
+.scan-resultat__message {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: var(--espace-sm);
+}
+
+.scan-resultat__details {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* ---- Panneau droit : stats + journal ---- */
+.scan-panneau {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espace-lg);
+}
+
+/* Stats rapides */
+.scan-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--espace-md);
+}
+
+.scan-stat {
+    background-color: var(--couleur-fond-carte);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: var(--arrondi-md);
+    padding: var(--espace-lg);
+    text-align: center;
+}
+
+.scan-stat__nombre {
+    display: block;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--couleur-texte);
+}
+
+.scan-stat__label {
+    font-size: 0.8rem;
+    color: var(--couleur-texte-secondaire);
+}
+
+/* Journal temps réel */
+.scan-journal {
+    background-color: var(--couleur-fond-carte);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: var(--arrondi-md);
+    overflow: hidden;
+    flex: 1;
+}
+
+.scan-journal__entete {
+    padding: var(--espace-md) var(--espace-lg);
+    border-bottom: 1px solid var(--couleur-bordure);
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.scan-journal__liste {
+    list-style: none;
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.scan-journal__item {
+    display: flex;
+    align-items: center;
+    gap: var(--espace-md);
+    padding: var(--espace-md) var(--espace-lg);
+    border-bottom: 1px solid var(--couleur-bordure);
+    font-size: 0.85rem;
+    animation: glisser 0.3s ease;
+}
+
+@keyframes glisser {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.scan-journal__item:last-child {
+    border-bottom: none;
+}
+
+.scan-journal__point {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.scan-journal__point--valide {
+    background-color: var(--couleur-succes);
+}
+
+.scan-journal__point--double {
+    background-color: orange;
+}
+
+.scan-journal__point--refuse {
+    background-color: var(--couleur-erreur);
+}
+
+.scan-journal__info {
+    flex: 1;
+}
+
+.scan-journal__nom {
+    font-weight: 600;
+}
+
+.scan-journal__type {
+    color: var(--couleur-texte-secondaire);
+    font-size: 0.8rem;
+}
+
+.scan-journal__heure {
+    color: var(--couleur-texte-secondaire);
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+/* ---- Responsive ---- */
+@media (min-width: 768px) {
+    .scan-interface {
+        grid-template-columns: 1fr 320px;
+    }
+}

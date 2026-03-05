@@ -1,0 +1,781 @@
+.
+├── appsettings.Development.json
+├── appsettings.json
+├── arborescence.txt
+├── bin
+│   └── Debug
+│       ├── net10.0
+│       │   ├── appsettings.Development.json
+│       │   ├── appsettings.json
+│       │   ├── BCrypt.Net-Next.dll
+│       │   ├── BuildHost-net472
+│       │   │   ├── cs
+│       │   │   │   └── System.CommandLine.resources.dll
+│       │   │   ├── de
+│       │   │   │   └── System.CommandLine.resources.dll
+│       │   │   ├── es
+│       │   │   │   └── System.CommandLine.resources.dll
+│       │   │   ├── fr
+│       │   │   │   └── System.CommandLine.resources.dll
+│       │   │   ├── it
+│       │   │   │   └── System.CommandLine.resources.dll
+│       │   │   ├── ja
+│       │   │   │   └── System.CommandLine.resources.dll
+│       │   │   ├── ko
+│       │   │   │   └── System.CommandLine.resources.dll
+│       │   │   ├── Microsoft.Build.Locator.dll
+│       │   │   ├── Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.exe
+│       │   │   ├── Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.exe.config
+│       │   │   ├── Microsoft.IO.Redist.dll
+│       │   │   ├── Newtonsoft.Json.dll
+│       │   │   ├── pl
+│       │   │   │   └── System.CommandLine.resources.dll
+│       │   │   ├── pt-BR
+│       │   │   │   └── System.CommandLine.resources.dll
+│       │   │   ├── ru
+│       │   │   │   └── System.CommandLine.resources.dll
+│       │   │   ├── System.Buffers.dll
+│       │   │   ├── System.Collections.Immutable.dll
+│       │   │   ├── System.CommandLine.dll
+│       │   │   ├── System.Memory.dll
+│       │   │   ├── System.Numerics.Vectors.dll
+│       │   │   ├── System.Runtime.CompilerServices.Unsafe.dll
+│       │   │   ├── System.Threading.Tasks.Extensions.dll
+│       │   │   ├── tr
+│       │   │   │   └── System.CommandLine.resources.dll
+│       │   │   ├── zh-Hans
+│       │   │   │   └── System.CommandLine.resources.dll
+│       │   │   └── zh-Hant
+│       │   │       └── System.CommandLine.resources.dll
+│       │   ├── BuildHost-netcore
+│       │   │   ├── cs
+│       │   │   │   └── System.CommandLine.resources.dll
+│       │   │   ├── de
+│       │   │   │   └── System.CommandLine.resources.dll
+│       │   │   ├── es
+│       │   │   │   └── System.CommandLine.resources.dll
+│       │   │   ├── fr
+│       │   │   │   └── System.CommandLine.resources.dll
+│       │   │   ├── it
+│       │   │   │   └── System.CommandLine.resources.dll
+│       │   │   ├── ja
+│       │   │   │   └── System.CommandLine.resources.dll
+│       │   │   ├── ko
+│       │   │   │   └── System.CommandLine.resources.dll
+│       │   │   ├── Microsoft.Build.Locator.dll
+│       │   │   ├── Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.deps.json
+│       │   │   ├── Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
+│       │   │   ├── Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.runtimeconfig.json
+│       │   │   ├── Newtonsoft.Json.dll
+│       │   │   ├── pl
+│       │   │   │   └── System.CommandLine.resources.dll
+│       │   │   ├── pt-BR
+│       │   │   │   └── System.CommandLine.resources.dll
+│       │   │   ├── ru
+│       │   │   │   └── System.CommandLine.resources.dll
+│       │   │   ├── System.Collections.Immutable.dll
+│       │   │   ├── System.CommandLine.dll
+│       │   │   ├── tr
+│       │   │   │   └── System.CommandLine.resources.dll
+│       │   │   ├── zh-Hans
+│       │   │   │   └── System.CommandLine.resources.dll
+│       │   │   └── zh-Hant
+│       │   │       └── System.CommandLine.resources.dll
+│       │   ├── cs
+│       │   │   ├── Microsoft.CodeAnalysis.CSharp.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
+│       │   │   └── Microsoft.CodeAnalysis.Workspaces.resources.dll
+│       │   ├── de
+│       │   │   ├── Microsoft.CodeAnalysis.CSharp.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
+│       │   │   └── Microsoft.CodeAnalysis.Workspaces.resources.dll
+│       │   ├── es
+│       │   │   ├── Microsoft.CodeAnalysis.CSharp.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
+│       │   │   └── Microsoft.CodeAnalysis.Workspaces.resources.dll
+│       │   ├── fr
+│       │   │   ├── Microsoft.CodeAnalysis.CSharp.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
+│       │   │   └── Microsoft.CodeAnalysis.Workspaces.resources.dll
+│       │   ├── global.json
+│       │   ├── Humanizer.dll
+│       │   ├── it
+│       │   │   ├── Microsoft.CodeAnalysis.CSharp.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
+│       │   │   └── Microsoft.CodeAnalysis.Workspaces.resources.dll
+│       │   ├── ja
+│       │   │   ├── Microsoft.CodeAnalysis.CSharp.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
+│       │   │   └── Microsoft.CodeAnalysis.Workspaces.resources.dll
+│       │   ├── ko
+│       │   │   ├── Microsoft.CodeAnalysis.CSharp.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
+│       │   │   └── Microsoft.CodeAnalysis.Workspaces.resources.dll
+│       │   ├── Labilletterie
+│       │   ├── Labilletterie.deps.json
+│       │   ├── Labilletterie.dll
+│       │   ├── Labilletterie.pdb
+│       │   ├── Labilletterie.runtimeconfig.json
+│       │   ├── Labilletterie.staticwebassets.endpoints.json
+│       │   ├── Labilletterie.staticwebassets.runtime.json
+│       │   ├── LatoFont
+│       │   │   ├── Lato-BlackItalic.ttf
+│       │   │   ├── Lato-Black.ttf
+│       │   │   ├── Lato-BoldItalic.ttf
+│       │   │   ├── Lato-Bold.ttf
+│       │   │   ├── Lato-ExtraBoldItalic.ttf
+│       │   │   ├── Lato-ExtraBold.ttf
+│       │   │   ├── Lato-ExtraLightItalic.ttf
+│       │   │   ├── Lato-ExtraLight.ttf
+│       │   │   ├── Lato-Italic.ttf
+│       │   │   ├── Lato-LightItalic.ttf
+│       │   │   ├── Lato-Light.ttf
+│       │   │   ├── Lato-MediumItalic.ttf
+│       │   │   ├── Lato-Medium.ttf
+│       │   │   ├── Lato-Regular.ttf
+│       │   │   ├── Lato-SemiBoldItalic.ttf
+│       │   │   ├── Lato-SemiBold.ttf
+│       │   │   ├── Lato-ThinItalic.ttf
+│       │   │   ├── Lato-Thin.ttf
+│       │   │   └── OFL.txt
+│       │   ├── Microsoft.Build.Framework.dll
+│       │   ├── Microsoft.CodeAnalysis.CSharp.dll
+│       │   ├── Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+│       │   ├── Microsoft.CodeAnalysis.dll
+│       │   ├── Microsoft.CodeAnalysis.ExternalAccess.RazorCompiler.dll
+│       │   ├── Microsoft.CodeAnalysis.Workspaces.dll
+│       │   ├── Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+│       │   ├── Microsoft.Data.Sqlite.dll
+│       │   ├── Microsoft.EntityFrameworkCore.Abstractions.dll
+│       │   ├── Microsoft.EntityFrameworkCore.Design.dll
+│       │   ├── Microsoft.EntityFrameworkCore.dll
+│       │   ├── Microsoft.EntityFrameworkCore.Relational.dll
+│       │   ├── Microsoft.EntityFrameworkCore.Sqlite.dll
+│       │   ├── Microsoft.Extensions.DependencyModel.dll
+│       │   ├── Microsoft.VisualStudio.SolutionPersistence.dll
+│       │   ├── Microsoft.Win32.SystemEvents.dll
+│       │   ├── Mono.TextTemplating.dll
+│       │   ├── Newtonsoft.Json.dll
+│       │   ├── pl
+│       │   │   ├── Microsoft.CodeAnalysis.CSharp.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
+│       │   │   └── Microsoft.CodeAnalysis.Workspaces.resources.dll
+│       │   ├── pt-BR
+│       │   │   ├── Microsoft.CodeAnalysis.CSharp.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
+│       │   │   └── Microsoft.CodeAnalysis.Workspaces.resources.dll
+│       │   ├── QRCoder.dll
+│       │   ├── QuestPDF.dll
+│       │   ├── ru
+│       │   │   ├── Microsoft.CodeAnalysis.CSharp.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
+│       │   │   └── Microsoft.CodeAnalysis.Workspaces.resources.dll
+│       │   ├── runtimes
+│       │   │   ├── browser-wasm
+│       │   │   │   └── nativeassets
+│       │   │   │       └── net9.0
+│       │   │   │           └── e_sqlite3.a
+│       │   │   ├── linux-arm
+│       │   │   │   └── native
+│       │   │   │       └── libe_sqlite3.so
+│       │   │   ├── linux-arm64
+│       │   │   │   └── native
+│       │   │   │       ├── libe_sqlite3.so
+│       │   │   │       ├── libqpdf.so
+│       │   │   │       └── libQuestPdfSkia.so
+│       │   │   ├── linux-armel
+│       │   │   │   └── native
+│       │   │   │       └── libe_sqlite3.so
+│       │   │   ├── linux-mips64
+│       │   │   │   └── native
+│       │   │   │       └── libe_sqlite3.so
+│       │   │   ├── linux-musl-arm
+│       │   │   │   └── native
+│       │   │   │       └── libe_sqlite3.so
+│       │   │   ├── linux-musl-arm64
+│       │   │   │   └── native
+│       │   │   │       └── libe_sqlite3.so
+│       │   │   ├── linux-musl-riscv64
+│       │   │   │   └── native
+│       │   │   │       └── libe_sqlite3.so
+│       │   │   ├── linux-musl-s390x
+│       │   │   │   └── native
+│       │   │   │       └── libe_sqlite3.so
+│       │   │   ├── linux-musl-x64
+│       │   │   │   └── native
+│       │   │   │       ├── libe_sqlite3.so
+│       │   │   │       ├── libqpdf.so
+│       │   │   │       └── libQuestPdfSkia.so
+│       │   │   ├── linux-ppc64le
+│       │   │   │   └── native
+│       │   │   │       └── libe_sqlite3.so
+│       │   │   ├── linux-riscv64
+│       │   │   │   └── native
+│       │   │   │       └── libe_sqlite3.so
+│       │   │   ├── linux-s390x
+│       │   │   │   └── native
+│       │   │   │       └── libe_sqlite3.so
+│       │   │   ├── linux-x64
+│       │   │   │   └── native
+│       │   │   │       ├── libe_sqlite3.so
+│       │   │   │       ├── libqpdf.so
+│       │   │   │       └── libQuestPdfSkia.so
+│       │   │   ├── linux-x86
+│       │   │   │   └── native
+│       │   │   │       └── libe_sqlite3.so
+│       │   │   ├── maccatalyst-arm64
+│       │   │   │   └── native
+│       │   │   │       └── libe_sqlite3.dylib
+│       │   │   ├── maccatalyst-x64
+│       │   │   │   └── native
+│       │   │   │       └── libe_sqlite3.dylib
+│       │   │   ├── osx-arm64
+│       │   │   │   └── native
+│       │   │   │       ├── libe_sqlite3.dylib
+│       │   │   │       ├── libqpdf.dylib
+│       │   │   │       └── libQuestPdfSkia.dylib
+│       │   │   ├── osx-x64
+│       │   │   │   └── native
+│       │   │   │       ├── libe_sqlite3.dylib
+│       │   │   │       ├── libqpdf.dylib
+│       │   │   │       └── libQuestPdfSkia.dylib
+│       │   │   ├── unix
+│       │   │   │   └── lib
+│       │   │   │       └── net6.0
+│       │   │   │           └── System.Drawing.Common.dll
+│       │   │   ├── win
+│       │   │   │   └── lib
+│       │   │   │       └── net6.0
+│       │   │   │           ├── Microsoft.Win32.SystemEvents.dll
+│       │   │   │           └── System.Drawing.Common.dll
+│       │   │   ├── win-arm
+│       │   │   │   └── native
+│       │   │   │       └── e_sqlite3.dll
+│       │   │   ├── win-arm64
+│       │   │   │   └── native
+│       │   │   │       └── e_sqlite3.dll
+│       │   │   ├── win-x64
+│       │   │   │   └── native
+│       │   │   │       ├── e_sqlite3.dll
+│       │   │   │       ├── libgcc_s_seh-1.dll
+│       │   │   │       ├── libstdc++-6.dll
+│       │   │   │       ├── libwinpthread-1.dll
+│       │   │   │       ├── qpdf.dll
+│       │   │   │       ├── QuestPdfSkia.dll
+│       │   │   │       └── zlib1.dll
+│       │   │   └── win-x86
+│       │   │       └── native
+│       │   │           ├── e_sqlite3.dll
+│       │   │           ├── libgcc_s_dw2-1.dll
+│       │   │           ├── libstdc++-6.dll
+│       │   │           ├── libwinpthread-1.dll
+│       │   │           ├── qpdf.dll
+│       │   │           ├── QuestPdfSkia.dll
+│       │   │           └── zlib1.dll
+│       │   ├── SQLitePCLRaw.batteries_v2.dll
+│       │   ├── SQLitePCLRaw.core.dll
+│       │   ├── SQLitePCLRaw.provider.e_sqlite3.dll
+│       │   ├── System.CodeDom.dll
+│       │   ├── System.Composition.AttributedModel.dll
+│       │   ├── System.Composition.Convention.dll
+│       │   ├── System.Composition.Hosting.dll
+│       │   ├── System.Composition.Runtime.dll
+│       │   ├── System.Composition.TypedParts.dll
+│       │   ├── System.Drawing.Common.dll
+│       │   ├── tr
+│       │   │   ├── Microsoft.CodeAnalysis.CSharp.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
+│       │   │   └── Microsoft.CodeAnalysis.Workspaces.resources.dll
+│       │   ├── zh-Hans
+│       │   │   ├── Microsoft.CodeAnalysis.CSharp.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.resources.dll
+│       │   │   ├── Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
+│       │   │   └── Microsoft.CodeAnalysis.Workspaces.resources.dll
+│       │   └── zh-Hant
+│       │       ├── Microsoft.CodeAnalysis.CSharp.resources.dll
+│       │       ├── Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│       │       ├── Microsoft.CodeAnalysis.resources.dll
+│       │       ├── Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
+│       │       └── Microsoft.CodeAnalysis.Workspaces.resources.dll
+│       └── net8.0
+│           ├── appsettings.Development.json
+│           ├── appsettings.json
+│           ├── BCrypt.Net-Next.dll
+│           ├── cs
+│           │   ├── Microsoft.CodeAnalysis.CSharp.resources.dll
+│           │   ├── Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│           │   ├── Microsoft.CodeAnalysis.resources.dll
+│           │   └── Microsoft.CodeAnalysis.Workspaces.resources.dll
+│           ├── de
+│           │   ├── Microsoft.CodeAnalysis.CSharp.resources.dll
+│           │   ├── Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│           │   ├── Microsoft.CodeAnalysis.resources.dll
+│           │   └── Microsoft.CodeAnalysis.Workspaces.resources.dll
+│           ├── es
+│           │   ├── Microsoft.CodeAnalysis.CSharp.resources.dll
+│           │   ├── Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│           │   ├── Microsoft.CodeAnalysis.resources.dll
+│           │   └── Microsoft.CodeAnalysis.Workspaces.resources.dll
+│           ├── fr
+│           │   ├── Microsoft.CodeAnalysis.CSharp.resources.dll
+│           │   ├── Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│           │   ├── Microsoft.CodeAnalysis.resources.dll
+│           │   └── Microsoft.CodeAnalysis.Workspaces.resources.dll
+│           ├── global.json
+│           ├── Humanizer.dll
+│           ├── it
+│           │   ├── Microsoft.CodeAnalysis.CSharp.resources.dll
+│           │   ├── Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│           │   ├── Microsoft.CodeAnalysis.resources.dll
+│           │   └── Microsoft.CodeAnalysis.Workspaces.resources.dll
+│           ├── ja
+│           │   ├── Microsoft.CodeAnalysis.CSharp.resources.dll
+│           │   ├── Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│           │   ├── Microsoft.CodeAnalysis.resources.dll
+│           │   └── Microsoft.CodeAnalysis.Workspaces.resources.dll
+│           ├── ko
+│           │   ├── Microsoft.CodeAnalysis.CSharp.resources.dll
+│           │   ├── Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│           │   ├── Microsoft.CodeAnalysis.resources.dll
+│           │   └── Microsoft.CodeAnalysis.Workspaces.resources.dll
+│           ├── Labilletterie
+│           ├── Labilletterie.deps.json
+│           ├── Labilletterie.dll
+│           ├── Labilletterie.pdb
+│           ├── Labilletterie.runtimeconfig.json
+│           ├── Labilletterie.staticwebassets.endpoints.json
+│           ├── Labilletterie.staticwebassets.runtime.json
+│           ├── Microsoft.Bcl.AsyncInterfaces.dll
+│           ├── Microsoft.CodeAnalysis.CSharp.dll
+│           ├── Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+│           ├── Microsoft.CodeAnalysis.dll
+│           ├── Microsoft.CodeAnalysis.Workspaces.dll
+│           ├── Microsoft.Data.Sqlite.dll
+│           ├── Microsoft.EntityFrameworkCore.Abstractions.dll
+│           ├── Microsoft.EntityFrameworkCore.Design.dll
+│           ├── Microsoft.EntityFrameworkCore.dll
+│           ├── Microsoft.EntityFrameworkCore.Relational.dll
+│           ├── Microsoft.EntityFrameworkCore.Sqlite.dll
+│           ├── Microsoft.Extensions.DependencyModel.dll
+│           ├── Mono.TextTemplating.dll
+│           ├── pl
+│           │   ├── Microsoft.CodeAnalysis.CSharp.resources.dll
+│           │   ├── Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│           │   ├── Microsoft.CodeAnalysis.resources.dll
+│           │   └── Microsoft.CodeAnalysis.Workspaces.resources.dll
+│           ├── pt-BR
+│           │   ├── Microsoft.CodeAnalysis.CSharp.resources.dll
+│           │   ├── Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│           │   ├── Microsoft.CodeAnalysis.resources.dll
+│           │   └── Microsoft.CodeAnalysis.Workspaces.resources.dll
+│           ├── ru
+│           │   ├── Microsoft.CodeAnalysis.CSharp.resources.dll
+│           │   ├── Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│           │   ├── Microsoft.CodeAnalysis.resources.dll
+│           │   └── Microsoft.CodeAnalysis.Workspaces.resources.dll
+│           ├── runtimes
+│           │   ├── browser-wasm
+│           │   │   └── nativeassets
+│           │   │       └── net8.0
+│           │   │           └── e_sqlite3.a
+│           │   ├── linux-arm
+│           │   │   └── native
+│           │   │       └── libe_sqlite3.so
+│           │   ├── linux-arm64
+│           │   │   └── native
+│           │   │       └── libe_sqlite3.so
+│           │   ├── linux-armel
+│           │   │   └── native
+│           │   │       └── libe_sqlite3.so
+│           │   ├── linux-mips64
+│           │   │   └── native
+│           │   │       └── libe_sqlite3.so
+│           │   ├── linux-musl-arm
+│           │   │   └── native
+│           │   │       └── libe_sqlite3.so
+│           │   ├── linux-musl-arm64
+│           │   │   └── native
+│           │   │       └── libe_sqlite3.so
+│           │   ├── linux-musl-x64
+│           │   │   └── native
+│           │   │       └── libe_sqlite3.so
+│           │   ├── linux-ppc64le
+│           │   │   └── native
+│           │   │       └── libe_sqlite3.so
+│           │   ├── linux-s390x
+│           │   │   └── native
+│           │   │       └── libe_sqlite3.so
+│           │   ├── linux-x64
+│           │   │   └── native
+│           │   │       └── libe_sqlite3.so
+│           │   ├── linux-x86
+│           │   │   └── native
+│           │   │       └── libe_sqlite3.so
+│           │   ├── maccatalyst-arm64
+│           │   │   └── native
+│           │   │       └── libe_sqlite3.dylib
+│           │   ├── maccatalyst-x64
+│           │   │   └── native
+│           │   │       └── libe_sqlite3.dylib
+│           │   ├── osx-arm64
+│           │   │   └── native
+│           │   │       └── libe_sqlite3.dylib
+│           │   ├── osx-x64
+│           │   │   └── native
+│           │   │       └── libe_sqlite3.dylib
+│           │   ├── win-arm
+│           │   │   └── native
+│           │   │       └── e_sqlite3.dll
+│           │   ├── win-arm64
+│           │   │   └── native
+│           │   │       └── e_sqlite3.dll
+│           │   ├── win-x64
+│           │   │   └── native
+│           │   │       └── e_sqlite3.dll
+│           │   └── win-x86
+│           │       └── native
+│           │           └── e_sqlite3.dll
+│           ├── SQLitePCLRaw.batteries_v2.dll
+│           ├── SQLitePCLRaw.core.dll
+│           ├── SQLitePCLRaw.provider.e_sqlite3.dll
+│           ├── System.CodeDom.dll
+│           ├── System.Composition.AttributedModel.dll
+│           ├── System.Composition.Convention.dll
+│           ├── System.Composition.Hosting.dll
+│           ├── System.Composition.Runtime.dll
+│           ├── System.Composition.TypedParts.dll
+│           ├── tr
+│           │   ├── Microsoft.CodeAnalysis.CSharp.resources.dll
+│           │   ├── Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│           │   ├── Microsoft.CodeAnalysis.resources.dll
+│           │   └── Microsoft.CodeAnalysis.Workspaces.resources.dll
+│           ├── zh-Hans
+│           │   ├── Microsoft.CodeAnalysis.CSharp.resources.dll
+│           │   ├── Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│           │   ├── Microsoft.CodeAnalysis.resources.dll
+│           │   └── Microsoft.CodeAnalysis.Workspaces.resources.dll
+│           └── zh-Hant
+│               ├── Microsoft.CodeAnalysis.CSharp.resources.dll
+│               ├── Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+│               ├── Microsoft.CodeAnalysis.resources.dll
+│               └── Microsoft.CodeAnalysis.Workspaces.resources.dll
+├── Controllers
+│   ├── AdminController.cs
+│   ├── BilletsController.cs
+│   ├── CompteController.cs
+│   ├── EvenementsController.cs
+│   └── HomeController.cs
+├── Data
+│   └── ApplicationDbContext.cs
+├── global.json
+├── Labilletterie.csproj
+├── labilletterie.db
+├── Labilletterie.sln
+├── Migrations
+│   ├── 20260304153757_InitialCreate.cs
+│   ├── 20260304153757_InitialCreate.Designer.cs
+│   └── ApplicationDbContextModelSnapshot.cs
+├── Models
+│   ├── Billet.cs
+│   ├── ErrorViewModel.cs
+│   ├── Evenement.cs
+│   └── Utilisateur.cs
+├── obj
+│   ├── Debug
+│   │   ├── net10.0
+│   │   │   ├── apphost
+│   │   │   ├── compressed
+│   │   │   │   ├── 01o10jv2b1-{0}-1a5u1b9pbl-1a5u1b9pbl.gz
+│   │   │   │   ├── 08e51cjaz0-{0}-fctod5rc9n-fctod5rc9n.gz
+│   │   │   │   ├── 0blz41v8q8-{0}-m39kt2b5c9-m39kt2b5c9.gz
+│   │   │   │   ├── 0pxtpdydyq-{0}-q2ku51ktnl-q2ku51ktnl.gz
+│   │   │   │   ├── 1jgfzilias-{0}-b8dai1v1ng-b8dai1v1ng.gz
+│   │   │   │   ├── 1oba9d1u6w-{0}-zwph15dxgs-zwph15dxgs.gz
+│   │   │   │   ├── 1z66bxujcj-{0}-ve6x09088i-ve6x09088i.gz
+│   │   │   │   ├── 1zx2jrjw6s-{0}-wmug9u23qg-wmug9u23qg.gz
+│   │   │   │   ├── 2sz4oif2px-{0}-tey0rigmnh-tey0rigmnh.gz
+│   │   │   │   ├── 354r1mhjp7-{0}-u33ctipx7g-u33ctipx7g.gz
+│   │   │   │   ├── 3acpib3705-{0}-pzqfkb6aqo-pzqfkb6aqo.gz
+│   │   │   │   ├── 49yfmjtolz-{0}-8inm30yfxf-8inm30yfxf.gz
+│   │   │   │   ├── 4c94j6xl4c-{0}-okkk44j0xs-okkk44j0xs.gz
+│   │   │   │   ├── 4cvccpzzpe-{0}-l3n5xuwxn8-l3n5xuwxn8.gz
+│   │   │   │   ├── 6n3eauo567-{0}-5pze98is44-5pze98is44.gz
+│   │   │   │   ├── 7xl3yhdxz0-{0}-jfsiqqwiad-jfsiqqwiad.gz
+│   │   │   │   ├── 8dekhn6gv4-{0}-x89jqbabf9-x89jqbabf9.gz
+│   │   │   │   ├── 9eqzaulhj2-{0}-4v8eqarkd7-4v8eqarkd7.gz
+│   │   │   │   ├── 9g6ds4z1z6-{0}-u3xrusw2ol-u3xrusw2ol.gz
+│   │   │   │   ├── akxks76uqw-{0}-bpk8xqwxhs-bpk8xqwxhs.gz
+│   │   │   │   ├── arv5jq45f6-{0}-b7iojwaux1-b7iojwaux1.gz
+│   │   │   │   ├── awg1exz0th-{0}-b4skse8du6-b4skse8du6.gz
+│   │   │   │   ├── bof5pjm3e5-{0}-vy0bq9ydhf-vy0bq9ydhf.gz
+│   │   │   │   ├── bs7xqxmv99-{0}-ub9d461zg8-ub9d461zg8.gz
+│   │   │   │   ├── byvf7by8ur-{0}-xzw0cte36n-xzw0cte36n.gz
+│   │   │   │   ├── c0ggr3qo4u-{0}-c2nslu3uf3-c2nslu3uf3.gz
+│   │   │   │   ├── c6kx26ocdc-{0}-o4kw7cc6tf-o4kw7cc6tf.gz
+│   │   │   │   ├── cc7hcptale-{0}-l2av4jpuoj-l2av4jpuoj.gz
+│   │   │   │   ├── dmt4911mgt-{0}-fosamezn9b-fosamezn9b.gz
+│   │   │   │   ├── e4dspuyti7-{0}-ab1c3rmv7g-ab1c3rmv7g.gz
+│   │   │   │   ├── gj0h7dyjnb-{0}-4gxs3k148c-4gxs3k148c.gz
+│   │   │   │   ├── i156io3ci1-{0}-61n19gt1b8-61n19gt1b8.gz
+│   │   │   │   ├── iabh6f5dht-{0}-unj9p35syc-unj9p35syc.gz
+│   │   │   │   ├── ilx3hiizqa-{0}-6mr42znqhc-6mr42znqhc.gz
+│   │   │   │   ├── j57031f00g-{0}-agp80tu62r-agp80tu62r.gz
+│   │   │   │   ├── k1hltsacra-{0}-9b9oa1qrmt-9b9oa1qrmt.gz
+│   │   │   │   ├── kd0eci9e7i-{0}-fr7q2aak1r-fr7q2aak1r.gz
+│   │   │   │   ├── kjb02hmpzj-{0}-dd6z7egasc-dd6z7egasc.gz
+│   │   │   │   ├── l0ic3g413t-{0}-wsezl0heh6-wsezl0heh6.gz
+│   │   │   │   ├── mq7jw3e9y7-{0}-73kdqttayv-73kdqttayv.gz
+│   │   │   │   ├── n0o9rfu7cr-{0}-mpyigms19s-mpyigms19s.gz
+│   │   │   │   ├── ndth2su8a8-{0}-25iw1kog22-25iw1kog22.gz
+│   │   │   │   ├── paurdd45h2-{0}-npxfuf8dg6-npxfuf8dg6.gz
+│   │   │   │   ├── pfkzjlaxdt-{0}-35gxhxa0gh-35gxhxa0gh.gz
+│   │   │   │   ├── pwg8qkeypb-{0}-st1cbwfwo5-st1cbwfwo5.gz
+│   │   │   │   ├── pxdmp4wufk-{0}-4zuls48nvg-4zuls48nvg.gz
+│   │   │   │   ├── pxnj1banpz-{0}-yt9hl9dmp8-yt9hl9dmp8.gz
+│   │   │   │   ├── pyp8quvfcw-{0}-n1oizzvkh6-n1oizzvkh6.gz
+│   │   │   │   ├── qptyuzb5rv-{0}-j75batdsum-j75batdsum.gz
+│   │   │   │   ├── qs3mfrqimk-{0}-2q4vfeazbq-2q4vfeazbq.gz
+│   │   │   │   ├── qz6e1zfv70-{0}-0wve5yxp74-0wve5yxp74.gz
+│   │   │   │   ├── r75rg0jor0-{0}-7na4sro3qu-7na4sro3qu.gz
+│   │   │   │   ├── rmst3osti8-{0}-gcjdx5jb8l-gcjdx5jb8l.gz
+│   │   │   │   ├── tclko49ud9-{0}-fwhahm2icz-fwhahm2icz.gz
+│   │   │   │   ├── tqha8qjxfs-{0}-o371a8zbv2-o371a8zbv2.gz
+│   │   │   │   ├── u1o3nbvcgn-{0}-jeal3x0ldm-jeal3x0ldm.gz
+│   │   │   │   ├── ufylsy344q-{0}-2lgwfvgpvi-2lgwfvgpvi.gz
+│   │   │   │   ├── v172xpl0e2-{0}-6ukhryfubh-6ukhryfubh.gz
+│   │   │   │   ├── vojb5zsnjd-{0}-qx3iwkcovm-qx3iwkcovm.gz
+│   │   │   │   ├── vrvztt1elv-{0}-f8imaxxbri-f8imaxxbri.gz
+│   │   │   │   ├── vxnhhwq0kv-{0}-um2aeqy4ik-um2aeqy4ik.gz
+│   │   │   │   ├── vzrozifutp-{0}-47otxtyo56-47otxtyo56.gz
+│   │   │   │   ├── xlbtl3ibun-{0}-5vj65cig9w-5vj65cig9w.gz
+│   │   │   │   ├── xmixfeb2m2-{0}-kbynt5jhd9-kbynt5jhd9.gz
+│   │   │   │   ├── ysqlzx8br6-{0}-56d2bn4wt9-56d2bn4wt9.gz
+│   │   │   │   ├── z8bwlrivwc-{0}-16095smhkz-16095smhkz.gz
+│   │   │   │   ├── zryb88ffwr-{0}-yt9hl9dmp8-yt9hl9dmp8.gz
+│   │   │   │   └── zxthlp9fu7-{0}-cwzlr5n8x4-cwzlr5n8x4.gz
+│   │   │   ├── Labillet.469A98D4.Up2Date
+│   │   │   ├── Labilletterie.AssemblyInfo.cs
+│   │   │   ├── Labilletterie.AssemblyInfoInputs.cache
+│   │   │   ├── Labilletterie.assets.cache
+│   │   │   ├── Labilletterie.csproj.AssemblyReference.cache
+│   │   │   ├── Labilletterie.csproj.CoreCompileInputs.cache
+│   │   │   ├── Labilletterie.csproj.FileListAbsolute.txt
+│   │   │   ├── Labilletterie.dll
+│   │   │   ├── Labilletterie.GeneratedMSBuildEditorConfig.editorconfig
+│   │   │   ├── Labilletterie.genruntimeconfig.cache
+│   │   │   ├── Labilletterie.GlobalUsings.g.cs
+│   │   │   ├── Labilletterie.MvcApplicationPartsAssemblyInfo.cache
+│   │   │   ├── Labilletterie.pdb
+│   │   │   ├── Labilletterie.RazorAssemblyInfo.cache
+│   │   │   ├── Labilletterie.RazorAssemblyInfo.cs
+│   │   │   ├── Labilletterie.sourcelink.json
+│   │   │   ├── rbcswa.dswa.cache.json
+│   │   │   ├── ref
+│   │   │   │   └── Labilletterie.dll
+│   │   │   ├── refint
+│   │   │   │   └── Labilletterie.dll
+│   │   │   ├── rjimswa.dswa.cache.json
+│   │   │   ├── rjsmcshtml.dswa.cache.json
+│   │   │   ├── rjsmrazor.dswa.cache.json
+│   │   │   ├── rpswa.dswa.cache.json
+│   │   │   ├── scopedcss
+│   │   │   │   ├── bundle
+│   │   │   │   │   └── Labilletterie.styles.css
+│   │   │   │   ├── projectbundle
+│   │   │   │   │   └── Labilletterie.bundle.scp.css
+│   │   │   │   └── Views
+│   │   │   │       └── Shared
+│   │   │   │           └── _Layout.cshtml.rz.scp.css
+│   │   │   ├── staticwebassets
+│   │   │   ├── staticwebassets.build.endpoints.json
+│   │   │   ├── staticwebassets.build.json
+│   │   │   ├── staticwebassets.build.json.cache
+│   │   │   ├── staticwebassets.development.json
+│   │   │   └── swae.build.ex.cache
+│   │   └── net8.0
+│   │       ├── apphost
+│   │       ├── Labillet.469A98D4.Up2Date
+│   │       ├── Labilletterie.AssemblyInfo.cs
+│   │       ├── Labilletterie.AssemblyInfoInputs.cache
+│   │       ├── Labilletterie.assets.cache
+│   │       ├── Labilletterie.csproj.CoreCompileInputs.cache
+│   │       ├── Labilletterie.csproj.FileListAbsolute.txt
+│   │       ├── Labilletterie.dll
+│   │       ├── Labilletterie.GeneratedMSBuildEditorConfig.editorconfig
+│   │       ├── Labilletterie.genruntimeconfig.cache
+│   │       ├── Labilletterie.GlobalUsings.g.cs
+│   │       ├── Labilletterie.MvcApplicationPartsAssemblyInfo.cache
+│   │       ├── Labilletterie.pdb
+│   │       ├── Labilletterie.RazorAssemblyInfo.cache
+│   │       ├── Labilletterie.RazorAssemblyInfo.cs
+│   │       ├── Labilletterie.sourcelink.json
+│   │       ├── ref
+│   │       │   └── Labilletterie.dll
+│   │       ├── refint
+│   │       │   └── Labilletterie.dll
+│   │       ├── rjimswa.dswa.cache.json
+│   │       ├── rjsmcshtml.dswa.cache.json
+│   │       ├── rjsmrazor.dswa.cache.json
+│   │       ├── rpswa.dswa.cache.json
+│   │       ├── scopedcss
+│   │       │   ├── bundle
+│   │       │   │   └── Labilletterie.styles.css
+│   │       │   ├── projectbundle
+│   │       │   │   └── Labilletterie.bundle.scp.css
+│   │       │   └── Views
+│   │       │       └── Shared
+│   │       │           └── _Layout.cshtml.rz.scp.css
+│   │       ├── staticwebassets
+│   │       ├── staticwebassets.build.endpoints.json
+│   │       ├── staticwebassets.build.json
+│   │       ├── staticwebassets.build.json.cache
+│   │       ├── staticwebassets.development.json
+│   │       └── swae.build.ex.cache
+│   ├── Labilletterie.csproj.nuget.dgspec.json
+│   ├── Labilletterie.csproj.nuget.g.props
+│   ├── Labilletterie.csproj.nuget.g.targets
+│   ├── project.assets.json
+│   └── project.nuget.cache
+├── packages.lock.json
+├── Program.cs
+├── Properties
+│   └── launchSettings.json
+├── Services
+│   ├── PdfBilletService.cs
+│   └── QrCodeService.cs
+├── ViewModels
+│   ├── ConnexionViewModel.cs
+│   ├── EvenementViewModel.cs
+│   └── InscriptionViewModel.cs
+├── Views
+│   ├── Admin
+│   │   ├── Evenements.cshtml
+│   │   ├── Index.cshtml
+│   │   └── Utilisateurs.cshtml
+│   ├── Billets
+│   │   ├── Acheter.cshtml
+│   │   ├── MonBillet.cshtml
+│   │   └── MonEspace.cshtml
+│   ├── Compte
+│   │   ├── Connexion.cshtml
+│   │   └── Inscription.cshtml
+│   ├── Evenements
+│   │   ├── Creer.cshtml
+│   │   ├── Detail.cshtml
+│   │   ├── Index.cshtml
+│   │   └── MesEvenements.cshtml
+│   ├── Home
+│   │   ├── Index.cshtml
+│   │   └── Privacy.cshtml
+│   ├── Shared
+│   │   ├── Error.cshtml
+│   │   ├── _Layout.cshtml
+│   │   ├── _Layout.cshtml.css
+│   │   └── _ValidationScriptsPartial.cshtml
+│   ├── _ViewImports.cshtml
+│   └── _ViewStart.cshtml
+└── wwwroot
+    ├── css
+    │   ├── accueil.css
+    │   ├── admin.css
+    │   ├── auth.css
+    │   ├── base.css
+    │   ├── billets.css
+    │   ├── evenements.css
+    │   ├── site.css
+    │   └── variables.css
+    ├── favicon.ico
+    ├── js
+    │   └── site.js
+    └── lib
+        ├── bootstrap
+        │   ├── dist
+        │   │   ├── css
+        │   │   │   ├── bootstrap.css
+        │   │   │   ├── bootstrap.css.map
+        │   │   │   ├── bootstrap-grid.css
+        │   │   │   ├── bootstrap-grid.css.map
+        │   │   │   ├── bootstrap-grid.min.css
+        │   │   │   ├── bootstrap-grid.min.css.map
+        │   │   │   ├── bootstrap-grid.rtl.css
+        │   │   │   ├── bootstrap-grid.rtl.css.map
+        │   │   │   ├── bootstrap-grid.rtl.min.css
+        │   │   │   ├── bootstrap-grid.rtl.min.css.map
+        │   │   │   ├── bootstrap.min.css
+        │   │   │   ├── bootstrap.min.css.map
+        │   │   │   ├── bootstrap-reboot.css
+        │   │   │   ├── bootstrap-reboot.css.map
+        │   │   │   ├── bootstrap-reboot.min.css
+        │   │   │   ├── bootstrap-reboot.min.css.map
+        │   │   │   ├── bootstrap-reboot.rtl.css
+        │   │   │   ├── bootstrap-reboot.rtl.css.map
+        │   │   │   ├── bootstrap-reboot.rtl.min.css
+        │   │   │   ├── bootstrap-reboot.rtl.min.css.map
+        │   │   │   ├── bootstrap.rtl.css
+        │   │   │   ├── bootstrap.rtl.css.map
+        │   │   │   ├── bootstrap.rtl.min.css
+        │   │   │   ├── bootstrap.rtl.min.css.map
+        │   │   │   ├── bootstrap-utilities.css
+        │   │   │   ├── bootstrap-utilities.css.map
+        │   │   │   ├── bootstrap-utilities.min.css
+        │   │   │   ├── bootstrap-utilities.min.css.map
+        │   │   │   ├── bootstrap-utilities.rtl.css
+        │   │   │   ├── bootstrap-utilities.rtl.css.map
+        │   │   │   ├── bootstrap-utilities.rtl.min.css
+        │   │   │   └── bootstrap-utilities.rtl.min.css.map
+        │   │   └── js
+        │   │       ├── bootstrap.bundle.js
+        │   │       ├── bootstrap.bundle.js.map
+        │   │       ├── bootstrap.bundle.min.js
+        │   │       ├── bootstrap.bundle.min.js.map
+        │   │       ├── bootstrap.esm.js
+        │   │       ├── bootstrap.esm.js.map
+        │   │       ├── bootstrap.esm.min.js
+        │   │       ├── bootstrap.esm.min.js.map
+        │   │       ├── bootstrap.js
+        │   │       ├── bootstrap.js.map
+        │   │       ├── bootstrap.min.js
+        │   │       └── bootstrap.min.js.map
+        │   └── LICENSE
+        ├── jquery
+        │   ├── dist
+        │   │   ├── jquery.js
+        │   │   ├── jquery.min.js
+        │   │   └── jquery.min.map
+        │   └── LICENSE.txt
+        ├── jquery-validation
+        │   ├── dist
+        │   │   ├── additional-methods.js
+        │   │   ├── additional-methods.min.js
+        │   │   ├── jquery.validate.js
+        │   │   └── jquery.validate.min.js
+        │   └── LICENSE.md
+        └── jquery-validation-unobtrusive
+            ├── jquery.validate.unobtrusive.js
+            ├── jquery.validate.unobtrusive.min.js
+            └── LICENSE.txt
+
+204 directories, 575 files

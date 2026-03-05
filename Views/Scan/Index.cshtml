@@ -1,0 +1,51 @@
+@* Views/Scan/Index.cshtml *@
+@model List<Labilletterie.Models.Evenement>
+
+@{
+    ViewData["Title"] = "Contrôle d'accès";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/scan.css" />
+    <link rel="stylesheet" href="~/css/accueil.css" />
+}
+
+<div class="scan-container">
+    <h1>📱 Contrôle d'accès</h1>
+    <p class="sous-titre">Sélectionnez l'événement à contrôler</p>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="evenements-grille">
+            @foreach (var evt in Model)
+            {
+                <a asp-controller="Scan"    asp-action="Evenement"        asp-route-id="@evt.Id"           class="evenement-carte">
+                    <div class="evenement-carte__image">
+                        📱
+                        <span class="evenement-carte__categorie">@evt.Categorie</span>
+                    </div>
+                    <div class="evenement-carte__corps">
+                        <h3 class="evenement-carte__titre">@evt.Titre</h3>
+                        <div class="evenement-carte__meta">
+                            <span>📅 @evt.DateEvenement.ToString("dd MMM yyyy à HH:mm")</span>
+                            <span>📍 @evt.Lieu</span>
+                        </div>
+                        <div class="evenement-carte__pied">
+                            <span style="color: var(--couleur-succes); font-weight:600;">
+                                ✅ Démarrer le scan
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+    }
+    else
+    {
+        <div style="text-align:center; padding: var(--espace-xxl);
+            color: var(--couleur-texte-secondaire);">
+            <p style="font-size: 3rem;">📭</p>
+            <p>Aucun événement validé disponible pour le scan.</p>
+        </div>
+    }
+</div>

@@ -6,6 +6,11 @@ namespace Labilletterie.ViewModels
 {
     public class EvenementViewModel
     {
+        [MaxLength(500)]
+        [Display(Name = "URL de l'image")]
+        [Url(ErrorMessage = "L'URL n'est pas valide")]
+        public string? ImageUrl { get; set; }
+
         [Required(ErrorMessage = "Le titre est obligatoire")]
         [MaxLength(200)]
         [Display(Name = "Titre de l'événement")]

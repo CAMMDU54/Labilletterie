@@ -149,8 +149,8 @@ namespace Labilletterie.Controllers
                 PrixBase = model.PrixBase,
                 EstPrive = model.EstPrive,
                 MotDePassePrive = model.MotDePassePrive,
+                ImageUrl = model.ImageUrl, // ← AJOUT
                 OrganisateurId = userId,
-                // En attente de validation par un admin
                 Statut = "EnAttente"
             };
 

@@ -114,7 +114,17 @@
                 {
                     <a asp-controller="Evenements" asp-action="Detail" asp-route-id="@evt.Id" class="evenement-carte">
                         <div class="evenement-carte__image">
-                            🎟️
+                            @if (!string.IsNullOrEmpty(evt.ImageUrl))
+                            {
+                                <img src="@evt.ImageUrl"
+                                     alt="@evt.Titre"
+                                     style="width:100%; height:100%;
+                                object-fit:cover; display:block;" />
+                            }
+                            else
+                            {
+                                <span style="font-size:3rem;">🎟️</span>
+                            }
                             <span class="evenement-carte__categorie">@evt.Categorie</span>
                         </div>
                         <div class="evenement-carte__corps">
@@ -131,8 +141,7 @@
                                 <span class="evenement-carte__prix">
                                     @(evt.PrixBase == 0 ? "Gratuit" : evt.PrixBase.ToString("0.00") + " €")
                                 </span>
-                                <span
-                                    class="evenement-carte__places @(evt.NombrePlacesRestantes < 20 ? "evenement-carte__places--urgent" : "")">
+                                <span class="evenement-carte__places @(evt.NombrePlacesRestantes < 20 ? "evenement-carte__places--urgent" : "")">
                                     @(evt.NombrePlacesRestantes < 20
                                     ? $"⚡ {evt.NombrePlacesRestantes} places restantes"
                                     : $"{evt.NombrePlacesRestantes} places")

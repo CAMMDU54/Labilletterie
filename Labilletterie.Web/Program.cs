@@ -59,4 +59,20 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+// ---- SEED DES DONNÉES (à retirer en production) ----
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider
+        .GetRequiredService<ApplicationDbContext>();
+
+    // Lance le seed uniquement si on passe l'argument --seed
+    if (args.Contains("--seed"))
+    {
+        Console.WriteLine("🌱 Lancement du seed...");
+        await Labilletterie.Data.SeedData.InitialiserAsync(context);
+    }
+}
+
+app.Run();
+
 app.Run();

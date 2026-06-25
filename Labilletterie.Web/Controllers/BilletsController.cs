@@ -1,12 +1,13 @@
 // Controllers/BilletsController.cs
 
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 using Labilletterie.Data;
 using Labilletterie.Models;
 using Labilletterie.Services;
+using Labilletterie.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace Labilletterie.Controllers
 {
@@ -40,7 +41,6 @@ namespace Labilletterie.Controllers
 
             if (evenement == null) return NotFound();
 
-            // Vérifie qu'il reste des places
             if (evenement.NombrePlacesRestantes <= 0)
             {
                 TempData["Erreur"] = "Désolé, cet événement est complet.";
@@ -48,7 +48,9 @@ namespace Labilletterie.Controllers
                     new { id = evenementId });
             }
 
-            return View(evenement);
+            // Passe l'événement ET un ViewModel vide à la vue
+            ViewBag.Evenement = evenement;
+            return View(new AchatViewModel { EvenementId = evenementId });
         }
 
         // ============================================================
@@ -57,58 +59,96 @@ namespace Labilletterie.Controllers
         // ============================================================
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Confirmer(int evenementId, string typeBillet)
+        public async Task<IActionResult> Confirmer(AchatViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Evenement = await _context.Evenements
+                    .FirstOrDefaultAsync(e => e.Id == model.EvenementId);
+                return View("Acheter", model);
+            }
+
             var evenement = await _context.Evenements
-                .FirstOrDefaultAsync(e => e.Id == evenementId);
+                .FirstOrDefaultAsync(e => e.Id == model.EvenementId);
 
             if (evenement == null) return NotFound();
 
-            if (evenement.NombrePlacesRestantes <= 0)
+            // Vérifie qu'il y a assez de places pour la quantité demandée
+            if (evenement.NombrePlacesRestantes < model.Quantite)
             {
-                TempData["Erreur"] = "Cet événement est complet.";
-                return RedirectToAction("Index", "Evenements");
+                TempData["Erreur"] = $"Seulement {evenement.NombrePlacesRestantes} " +
+                                      "place(s) disponible(s).";
+                return RedirectToAction("Detail", "Evenements",
+                    new { id = model.EvenementId });
             }
 
-            // Récupère l'ID de l'acheteur connecté
             var acheteurId = int.Parse(
                 User.FindFirstValue(ClaimTypes.NameIdentifier)!);
 
-            // Calcule le prix selon le type de billet
-            decimal prix = typeBillet switch
+            // Calcul du prix unitaire selon le type
+            decimal prixUnitaire = model.TypeBillet switch
             {
                 "VIP" => evenement.PrixBase * 2,
                 "Réduit" => evenement.PrixBase * 0.5m,
-                _ => evenement.PrixBase  // Standard
+                _ => evenement.PrixBase
             };
 
-            // Crée le billet
-            var billet = new Billet
+            // Crée un billet par place demandée
+            var billets = new List<Billet>();
+            for (int i = 0; i < model.Quantite; i++)
             {
-                CodeQR = Guid.NewGuid().ToString(),
-                TypeBillet = typeBillet,
-                PrixPaye = prix,
-                StatutScan = "NonScanné",
-                AcheteurId = acheteurId,
-                EvenementId = evenementId,
-                DateAchat = DateTime.Now
-            };
-
-            // Décrémente le nombre de places restantes
-            evenement.NombrePlacesRestantes--;
-
-            // Ajoute des points fidélité (1€ = 1 point)
-            var acheteur = await _context.Utilisateurs.FindAsync(acheteurId);
-            if (acheteur != null)
-            {
-                acheteur.PointsFidelite += (int)prix;
+                billets.Add(new Billet
+                {
+                    CodeQR = Guid.NewGuid().ToString(),
+                    TypeBillet = model.TypeBillet,
+                    PrixPaye = prixUnitaire,
+                    StatutScan = "NonScanné",
+                    AcheteurId = acheteurId,
+                    EvenementId = model.EvenementId,
+                    DateAchat = DateTime.Now
+                });
             }
 
-            _context.Billets.Add(billet);
+            // Décrémente les places et ajoute les points fidélité
+            evenement.NombrePlacesRestantes -= model.Quantite;
+
+            var acheteur = await _context.Utilisateurs.FindAsync(acheteurId);
+            if (acheteur != null)
+                acheteur.PointsFidelite += (int)(prixUnitaire * model.Quantite);
+
+            _context.Billets.AddRange(billets);
             await _context.SaveChangesAsync();
 
-            // Redirige vers la page du billet
-            return RedirectToAction("MonBillet", new { id = billet.Id });
+            // Si un seul billet → page billet individuelle
+            // Si plusieurs → page récapitulatif de commande
+            if (model.Quantite == 1)
+                return RedirectToAction("MonBillet", new { id = billets[0].Id });
+
+            return RedirectToAction("Confirmation",
+                new { ids = string.Join(",", billets.Select(b => b.Id)) });
+        }
+
+        // Page de confirmation pour les achats multiples
+        public async Task<IActionResult> Confirmation(string ids)
+        {
+            var acheteurId = int.Parse(
+                User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            // Parse les IDs passés en paramètre
+            var listIds = ids.Split(',')
+                .Select(int.Parse)
+                .ToList();
+
+            var billets = await _context.Billets
+                .Include(b => b.Evenement)
+                .Include(b => b.Acheteur)
+                .Where(b => listIds.Contains(b.Id)
+                         && b.AcheteurId == acheteurId)
+                .ToListAsync();
+
+            if (!billets.Any()) return NotFound();
+
+            return View(billets);
         }
 
         // ============================================================

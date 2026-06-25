@@ -1,0 +1,145 @@
+﻿@* Views/Billets/Confirmation.cshtml *@
+@model List<Labilletterie.Models.Billet>
+
+@{
+    ViewData["Title"] = "Commande confirmée";
+    var premier = Model.First();
+    decimal totalPaye = Model.Sum(b => b.PrixPaye);
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/billets.css" />
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+
+            @* Message succès *@
+            <div class="alert alert-success mb-4">
+                🎉 Votre commande de <strong>@Model.Count billet(s)</strong>
+                a bien été confirmée !
+            </div>
+
+            @* Résumé de la commande *@
+            <div class="lb-form mb-4">
+                <h1 class="fs-4 fw-bold mb-4">
+                    📋 Récapitulatif de commande
+                </h1>
+
+                @* Infos événement *@
+                <div class="d-flex gap-3 mb-4 pb-4"
+                     style="border-bottom:1px solid var(--lb-bordure);">
+                    @if (!string.IsNullOrEmpty(premier.Evenement?.ImageUrl))
+                    {
+                        <img src="@premier.Evenement.ImageUrl"
+                             alt="@premier.Evenement?.Titre"
+                             style="width:80px; height:80px;
+                        object-fit:cover; border-radius:8px;
+                        flex-shrink:0;" />
+                    }
+                    <div>
+                        <div class="fw-bold fs-5">
+                            @premier.Evenement?.Titre
+                        </div>
+                        <div style="color:var(--lb-texte-s); font-size:0.9rem;">
+                            📅 @premier.Evenement?.DateEvenement
+                            .ToString("dd MMMM yyyy à HH:mm")
+                        </div>
+                        <div style="color:var(--lb-texte-s); font-size:0.9rem;">
+                            📍 @premier.Evenement?.Lieu
+                        </div>
+                    </div>
+                </div>
+
+                @* Liste des billets *@
+                <h2 class="fs-6 fw-bold mb-3"
+                    style="color:var(--lb-texte-s);
+                    text-transform:uppercase;
+                    letter-spacing:0.05em;">
+                    Vos billets
+                </h2>
+
+                @foreach (var (billet, index) in Model.Select((b, i) => (b, i + 1)))
+                {
+                    <div class="d-flex align-items-center justify-content-between
+                        p-3 mb-2"
+                         style="background:var(--lb-input);
+                        border-radius:8px;
+                        border:1px solid var(--lb-bordure);">
+                        <div class="d-flex align-items-center gap-3">
+                            <span style="font-size:1.5rem;">🎟️</span>
+                            <div>
+                                <div class="fw-bold">
+                                    Billet #@index — @billet.TypeBillet
+                                </div>
+                                <div style="font-size:0.8rem;
+                                    color:var(--lb-texte-s);
+                                    font-family:monospace;">
+                                    Réf : @billet.CodeQR[..8].ToUpper()
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center gap-3">
+                            <span class="fw-bold">
+                                @(billet.PrixPaye == 0 ? "Gratuit"
+                                    : billet.PrixPaye.ToString("0.00") + " €")
+                            </span>
+                            <a asp-controller="Billets"
+                               asp-action="MonBillet"
+                               asp-route-id="@billet.Id"
+                               class="btn-lb-outline"
+                               style="font-size:0.8rem; padding:4px 12px;">
+                                Voir QR
+                            </a>
+                            <a asp-controller="Billets"
+                               asp-action="Telecharger"
+                               asp-route-id="@billet.Id"
+                               class="btn-lb-outline"
+                               style="font-size:0.8rem; padding:4px 12px;">
+                                📥 PDF
+                            </a>
+                        </div>
+                    </div>
+                }
+
+                @* Total *@
+                <div class="d-flex justify-content-between align-items-center
+                    mt-4 pt-4 fw-bold fs-5"
+                     style="border-top:1px solid var(--lb-bordure);">
+                    <span>Total payé</span>
+                    <span>
+                        @(totalPaye == 0 ? "Gratuit"
+                            : totalPaye.ToString("0.00") + " €")
+                    </span>
+                </div>
+
+                @* Points fidélité gagnés *@
+                <div class="mt-2 text-center"
+                     style="color:var(--lb-texte-s); font-size:0.9rem;">
+                    🎁 Vous avez gagné
+                    <strong style="color:var(--lb-bordeaux-c);">
+                        @((int)totalPaye) points
+                    </strong>
+                    fidélité sur cette commande !
+                </div>
+
+            </div>
+
+            @* Boutons d'action *@
+            <div class="d-flex gap-3 justify-content-center flex-wrap">
+                <a asp-controller="Billets"
+                   asp-action="MonEspace"
+                   class="btn-lb">
+                    Voir tous mes billets
+                </a>
+                <a asp-controller="Evenements"
+                   asp-action="Index"
+                   class="btn-lb-outline">
+                    Continuer à explorer →
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>

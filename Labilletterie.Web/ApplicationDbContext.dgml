@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph GraphDirection="LeftToRight" Layout="Sugiyama" ZoomLevel="-1" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="Billet" Category="EntityType" Annotations="Relational:TableName: Billets RelationshipDiscoveryConvention:NavigationCandidates: Microsoft.EntityFrameworkCore.Utilities.OrderedDictionary`2[System.Reflection.PropertyInfo,System.ValueTuple`2[System.Type,System.Nullable`1[System.Boolean]]]" BaseClass="" Bounds="77.336947266054,197.019793188476,418.186712556067,253.840527050781" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot" Group="Expanded" IsAbstract="False" Label="Billet" Name="Billet" />
+    <Node Id="Billet.Acheteur" Category="Navigation Property" Bounds="181.886956380208,237.019893188477,84.6533333333334,25.9600000000001" Dependent="" Field="" Inverse="" Label="Acheteur (1)" Name="Acheteur" Principal="Utilisateur" PropertyAccessMode="PropertyAccessMode.Default" Type="Utilisateur" />
+    <Node Id="Billet.AcheteurId" Category="Property Foreign" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="97.3366385904947,292.980006713867,102.206666666667,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="True" IsIndexed="True" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="AcheteurId (int)" MaxLength="None" Name="AcheteurId" PropertyAccessMode="PropertyAccessMode.Default" Type="int" ValueGenerated="None" />
+    <Node Id="Billet.CodeQR" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="229.543576049805,292.980006713867,104.65,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="CodeQR (string)" MaxLength="None" Name="CodeQR" PropertyAccessMode="PropertyAccessMode.Default" Type="string" ValueGenerated="None" />
+    <Node Id="Billet.DateAchat" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="243.856951090495,404.90020324707,136.306666666667,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="DateAchat (DateTime)" MaxLength="None" Name="DateAchat" PropertyAccessMode="PropertyAccessMode.Default" Type="DateTime" ValueGenerated="None" />
+    <Node Id="Billet.Evenement" Category="Navigation Property" Bounds="296.540273844401,237.019893188477,95.6266666666667,25.96" Dependent="" Field="" Inverse="Billets" Label="Evenement (1)" Name="Evenement" Principal="Evenement" PropertyAccessMode="PropertyAccessMode.Default" Type="Evenement" />
+    <Node Id="Billet.EvenementId" Category="Property Foreign" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="97.3370935058595,348.94008972168,113.18,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="True" IsIndexed="True" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="EvenementId (int)" MaxLength="None" Name="EvenementId" PropertyAccessMode="PropertyAccessMode.Default" Type="int" ValueGenerated="None" />
+    <Node Id="Billet.Id" Category="Property Primary" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="97.3369689941406,237.019893188477,54.55,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="True" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Id (int)" MaxLength="None" Name="Id" PropertyAccessMode="PropertyAccessMode.Default" Type="int" ValueGenerated="ValueGenerated.OnAdd" />
+    <Node Id="Billet.PrixPaye" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnType: decimal(10,2)" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="240.51697672526,348.94008972168,115.476666666667,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="PrixPaye (decimal)" MaxLength="None" Name="PrixPaye" PropertyAccessMode="PropertyAccessMode.Default" Type="decimal" ValueGenerated="None" />
+    <Node Id="Billet.StatutScan" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="97.3369696044922,404.900172729492,116.52,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="StatutScan (string)" MaxLength="None" Name="StatutScan" PropertyAccessMode="PropertyAccessMode.Default" Type="string" ValueGenerated="None" />
+    <Node Id="Billet.TypeBillet" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="MaxLength: 50" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="364.193612060547,292.979976196289,111.33,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="TypeBillet (string)" MaxLength="(50)" Name="TypeBillet" PropertyAccessMode="PropertyAccessMode.Default" Type="string" ValueGenerated="None" />
+    <Node Id="Evenement" Category="EntityType" Annotations="Relational:TableName: Evenements RelationshipDiscoveryConvention:NavigationCandidates: Microsoft.EntityFrameworkCore.Utilities.OrderedDictionary`2[System.Reflection.PropertyInfo,System.ValueTuple`2[System.Type,System.Nullable`1[System.Boolean]]]" BaseClass="" Bounds="533.490377848737,287.059713814874,562.59001010471,365.760872453965" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot" Group="Expanded" IsAbstract="False" Label="Evenement" Name="Evenement" />
+    <Node Id="Evenement.Billets" Category="Navigation Collection" Bounds="818.880301920573,327.05987121582,66.5666666666666,25.96" Dependent="Billet" Field="" Inverse="Evenement" Label="Billets (*)" Name="Billets" Principal="" PropertyAccessMode="PropertyAccessMode.Default" Type="List&lt;Billet&gt;" />
+    <Node Id="Evenement.Categorie" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="MaxLength: 100" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="692.417052408854,438.98012878418,111.956666666667,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Categorie (string)" MaxLength="(100)" Name="Categorie" PropertyAccessMode="PropertyAccessMode.Default" Type="string" ValueGenerated="None" />
+    <Node Id="Evenement.DateCreation" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="553.490369873047,327.058986206055,150.84,25.9600000000002" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="DateCreation (DateTime)" MaxLength="None" Name="DateCreation" PropertyAccessMode="PropertyAccessMode.Default" Type="DateTime" ValueGenerated="None" />
+    <Node Id="Evenement.DateEvenement" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="911.390229492187,550.900096435547,164.69,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="DateEvenement (DateTime)" MaxLength="None" Name="DateEvenement" PropertyAccessMode="PropertyAccessMode.Default" Type="DateTime" ValueGenerated="None" />
+    <Node Id="Evenement.Description" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="553.490347086588,494.940211791992,120.876666666667,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Description (string)" MaxLength="None" Name="Description" PropertyAccessMode="PropertyAccessMode.Default" Type="string" ValueGenerated="None" />
+    <Node Id="Evenement.EstPrive" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="789.530322265625,383.019984741211,95.5999999999999,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="EstPrive (bool)" MaxLength="None" Name="EstPrive" PropertyAccessMode="PropertyAccessMode.Default" Type="bool" ValueGenerated="None" />
+    <Node Id="Evenement.Id" Category="Property Primary" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="734.330377197266,327.059932250977,54.55,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="True" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Id (int)" MaxLength="None" Name="Id" PropertyAccessMode="PropertyAccessMode.Default" Type="int" ValueGenerated="ValueGenerated.OnAdd" />
+    <Node Id="Evenement.ImageUrl" Category="Property Optional" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="MaxLength: 500" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="553.490463053385,438.980113525391,108.926666666667,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="False" IsShadow="False" IsUnicode="True" Label="ImageUrl (string)" MaxLength="(500)" Name="ImageUrl" PropertyAccessMode="PropertyAccessMode.Default" Type="string" ValueGenerated="None" />
+    <Node Id="Evenement.Lieu" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="MaxLength: 300" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="915.446979166667,327.059993286133,82.2466666666669,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Lieu (string)" MaxLength="(300)" Name="Lieu" PropertyAccessMode="PropertyAccessMode.Default" Type="string" ValueGenerated="None" />
+    <Node Id="Evenement.MotDePassePrive" Category="Property Optional" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="729.5003125,550.900279541016,151.89,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="False" IsShadow="False" IsUnicode="True" Label="MotDePassePrive (string)" MaxLength="None" Name="MotDePassePrive" PropertyAccessMode="PropertyAccessMode.Default" Type="string" ValueGenerated="None" />
+    <Node Id="Evenement.NombrePlacesRestantes" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="553.490389404297,606.860423583984,171.38,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="NombrePlacesRestantes (int)" MaxLength="None" Name="NombrePlacesRestantes" PropertyAccessMode="PropertyAccessMode.Default" Type="int" ValueGenerated="None" />
+    <Node Id="Evenement.NombrePlacesTotal" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="553.490483398437,550.90037109375,146.01,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="NombrePlacesTotal (int)" MaxLength="None" Name="NombrePlacesTotal" PropertyAccessMode="PropertyAccessMode.Default" Type="int" ValueGenerated="None" />
+    <Node Id="Evenement.Organisateur" Category="Navigation Property" Bounds="915.130335286458,383.020137329102,105.593333333333,25.96" Dependent="" Field="" Inverse="" Label="Organisateur (1)" Name="Organisateur" Principal="Utilisateur" PropertyAccessMode="PropertyAccessMode.Default" Type="Utilisateur" />
+    <Node Id="Evenement.OrganisateurId" Category="Property Foreign" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="704.367065836588,494.940272827148,123.146666666667,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="True" IsIndexed="True" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="OrganisateurId (int)" MaxLength="None" Name="OrganisateurId" PropertyAccessMode="PropertyAccessMode.Default" Type="int" ValueGenerated="None" />
+    <Node Id="Evenement.PrixBase" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="Relational:ColumnType: decimal(10,2)" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="834.373738606771,438.980189819336,115.333333333333,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="PrixBase (decimal)" MaxLength="None" Name="PrixBase" PropertyAccessMode="PropertyAccessMode.Default" Type="decimal" ValueGenerated="None" />
+    <Node Id="Evenement.Statut" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="667.823729654948,383.020015258789,91.7066666666669,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Statut (string)" MaxLength="None" Name="Statut" PropertyAccessMode="PropertyAccessMode.Default" Type="string" ValueGenerated="None" />
+    <Node Id="Evenement.Titre" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="MaxLength: 200" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="553.490498860677,383.020030517578,84.333333333333,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Titre (string)" MaxLength="(200)" Name="Titre" PropertyAccessMode="PropertyAccessMode.Default" Type="string" ValueGenerated="None" />
+    <Node Id="IModel" Category="Model" Annotations="BaseTypeDiscoveryConvention:DerivedTypes: System.Collections.Generic.Dictionary`2[System.Type,System.Collections.Generic.List`1[Microsoft.EntityFrameworkCore.Metadata.IConventionEntityType]] InversePropertyAttributeConvention:InverseNavigations: System.Collections.Generic.Dictionary`2[System.Type,System.Collections.Generic.SortedSet`1[System.Type]] NonNullableConventionState: System.Reflection.NullabilityInfoContext" Bounds="-339.002286536459,26.7805061730687,1854.06101983363,646.040111417243" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot" Group="Expanded" Label="ApplicationDbContext" ProductVersion="10.0.9" PropertyAccessMode="PropertyAccessMode.Default" UseManualLocation="True" />
+    <Node Id="Scan" Category="EntityType" Annotations="Relational:TableName: Scans RelationshipDiscoveryConvention:NavigationCandidates: Microsoft.EntityFrameworkCore.Utilities.OrderedDictionary`2[System.Reflection.PropertyInfo,System.ValueTuple`2[System.Type,System.Nullable`1[System.Boolean]]]" BaseClass="" Bounds="-319.002286536459,66.780611837135,340.365706772716,201.12448548584" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot" Group="Expanded" IsAbstract="False" Label="Scan" Name="Scan" />
+    <Node Id="Scan.Billet" Category="Navigation Property" Bounds="-177.535643310547,162.960017700195,62.94,25.96" Dependent="" Field="" Inverse="" Label="Billet (1)" Name="Billet" Principal="Billet" PropertyAccessMode="PropertyAccessMode.Default" Type="Billet" />
+    <Node Id="Scan.BilletId" Category="Property Foreign" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="-84.5955665079752,163.091510314941,80.4933333333333,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="True" IsIndexed="True" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="BilletId (int)" MaxLength="None" Name="BilletId" PropertyAccessMode="PropertyAccessMode.Default" Type="int" ValueGenerated="None" />
+    <Node Id="Scan.DateScan" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="-129.51001566569,219.051608581543,130.873333333333,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="DateScan (DateTime)" MaxLength="None" Name="DateScan" PropertyAccessMode="PropertyAccessMode.Default" Type="DateTime" ValueGenerated="None" />
+    <Node Id="Scan.Id" Category="Property Primary" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="-276.559896850586,106.780723114014,54.55,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="True" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Id (int)" MaxLength="None" Name="Id" PropertyAccessMode="PropertyAccessMode.Default" Type="int" UseManualLocation="True" ValueGenerated="ValueGenerated.OnAdd" />
+    <Node Id="Scan.Resultat" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="-262.266547444662,221.944995422363,102.756666666667,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Resultat (string)" MaxLength="None" Name="Resultat" PropertyAccessMode="PropertyAccessMode.Default" Type="string" ValueGenerated="None" />
+    <Node Id="Scan.ScannePar" Category="Navigation Property" Bounds="-299.002261861165,162.740802307129,91.4666666666667,25.96" Dependent="" Field="" Inverse="" Label="ScannePar (1)" Name="ScannePar" Principal="Utilisateur" PropertyAccessMode="PropertyAccessMode.Default" Type="Utilisateur" UseManualLocation="True" />
+    <Node Id="Scan.ScanneParId" Category="Property Foreign" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="-171.900701293945,106.999900360107,109.02,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="True" IsIndexed="True" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="ScanneParId (int)" MaxLength="None" Name="ScanneParId" PropertyAccessMode="PropertyAccessMode.Default" Type="int" ValueGenerated="None" />
+    <Node Id="Utilisateur" Category="EntityType" Annotations="" BaseClass="" Bounds="1135.47874818747,86.0197712829627,359.580002441407,253.840519421387" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot" Group="Expanded" IsAbstract="False" Label="Utilisateur" Name="Utilisateur" />
+    <Node Id="Utilisateur.DateCreation" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="1300.19859130859,237.939334411621,150.84,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="DateCreation (DateTime)" MaxLength="None" Name="DateCreation" PropertyAccessMode="PropertyAccessMode.Default" Type="DateTime" ValueGenerated="None" />
+    <Node Id="Utilisateur.Email" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="1386.10861816406,126.019885559082,88.9499999999998,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Email (string)" MaxLength="None" Name="Email" PropertyAccessMode="PropertyAccessMode.Default" Type="string" ValueGenerated="None" />
+    <Node Id="Utilisateur.EstActif" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="1155.47865722656,181.979983825684,93.79,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="EstActif (bool)" MaxLength="None" Name="EstActif" PropertyAccessMode="PropertyAccessMode.Default" Type="bool" ValueGenerated="None" />
+    <Node Id="Utilisateur.Id" Category="Property Primary" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="1338.05532226562,293.900172729492,54.5500000000002,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="True" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Id (int)" MaxLength="None" Name="Id" PropertyAccessMode="PropertyAccessMode.Default" Type="int" ValueGenerated="ValueGenerated.OnAdd" />
+    <Node Id="Utilisateur.MotDePasseHash" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="1155.47777994792,293.900172729492,152.576666666667,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="MotDePasseHash (string)" MaxLength="None" Name="MotDePasseHash" PropertyAccessMode="PropertyAccessMode.Default" Type="string" ValueGenerated="None" />
+    <Node Id="Utilisateur.Nom" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="MaxLength: 50" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="1269.14197184245,126.019889373779,86.9666666666667,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Nom (string)" MaxLength="(50)" Name="Nom" PropertyAccessMode="PropertyAccessMode.Default" Type="string" ValueGenerated="None" />
+    <Node Id="Utilisateur.PointsFidelite" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="1155.47874511719,237.940082092285,114.72,25.9600000000001" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="PointsFidelite (int)" MaxLength="None" Name="PointsFidelite" PropertyAccessMode="PropertyAccessMode.Default" Type="int" ValueGenerated="None" />
+    <Node Id="Utilisateur.Prenom" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="MaxLength: 50" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="1279.26865234375,181.979983825684,101.95,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Prenom (string)" MaxLength="(50)" Name="Prenom" PropertyAccessMode="PropertyAccessMode.Default" Type="string" ValueGenerated="None" />
+    <Node Id="Utilisateur.Role" Category="Property Required" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="" BeforeSaveBehavior="PropertySaveBehavior.Save" Bounds="1155.47863606771,126.019889373779,83.6633333333334,25.96" Field="" IsAlternateKey="False" IsConcurrencyToken="False" IsForeignKey="False" IsIndexed="False" IsPrimaryKey="False" IsRequired="True" IsShadow="False" IsUnicode="True" Label="Role (string)" MaxLength="None" Name="Role" PropertyAccessMode="PropertyAccessMode.Default" Type="string" ValueGenerated="None" />
+  </Nodes>
+  <Links>
+    <Link Source="Billet" Target="Billet.Acheteur" Category="Contains" />
+    <Link Source="Billet" Target="Billet.AcheteurId" Category="Contains" />
+    <Link Source="Billet" Target="Billet.CodeQR" Category="Contains" />
+    <Link Source="Billet" Target="Billet.DateAchat" Category="Contains" />
+    <Link Source="Billet" Target="Billet.Evenement" Category="Contains" />
+    <Link Source="Billet" Target="Billet.EvenementId" Category="Contains" />
+    <Link Source="Billet" Target="Billet.Id" Category="Contains" />
+    <Link Source="Billet" Target="Billet.PrixPaye" Category="Contains" />
+    <Link Source="Billet" Target="Billet.StatutScan" Category="Contains" />
+    <Link Source="Billet" Target="Billet.TypeBillet" Category="Contains" />
+    <Link Source="Billet" Target="Evenement" Category="Foreign Key" Annotations="" Bounds="495.523659822121,381.718718684917,29.2918247662784,8.09419520453611" From="Billet.EvenementId" IsUnique="False" Label="1:*" LabelBounds="503.665600847783,365.803108744625,14.0733333333337,15.96" Name="Billet -&gt; Evenement" To="Evenement.Id" />
+    <Link Source="Billet" Target="Utilisateur" Category="Foreign Key" Annotations="" Bounds="495.523651123047,225.805084228516,630.975982666016,56.5006408691406" From="Billet.AcheteurId" IsUnique="False" Label="1:*" LabelBounds="627.720793808853,240.710732717646,14.0733333333333,15.96" Name="Billet -&gt; Utilisateur" To="Utilisateur.Id" />
+    <Link Source="Evenement" Target="Evenement.Billets" Category="Contains" />
+    <Link Source="Evenement" Target="Evenement.Categorie" Category="Contains" />
+    <Link Source="Evenement" Target="Evenement.DateCreation" Category="Contains" />
+    <Link Source="Evenement" Target="Evenement.DateEvenement" Category="Contains" />
+    <Link Source="Evenement" Target="Evenement.Description" Category="Contains" />
+    <Link Source="Evenement" Target="Evenement.EstPrive" Category="Contains" />
+    <Link Source="Evenement" Target="Evenement.Id" Category="Contains" />
+    <Link Source="Evenement" Target="Evenement.ImageUrl" Category="Contains" />
+    <Link Source="Evenement" Target="Evenement.Lieu" Category="Contains" />
+    <Link Source="Evenement" Target="Evenement.MotDePassePrive" Category="Contains" />
+    <Link Source="Evenement" Target="Evenement.NombrePlacesRestantes" Category="Contains" />
+    <Link Source="Evenement" Target="Evenement.NombrePlacesTotal" Category="Contains" />
+    <Link Source="Evenement" Target="Evenement.Organisateur" Category="Contains" />
+    <Link Source="Evenement" Target="Evenement.OrganisateurId" Category="Contains" />
+    <Link Source="Evenement" Target="Evenement.PrixBase" Category="Contains" />
+    <Link Source="Evenement" Target="Evenement.Statut" Category="Contains" />
+    <Link Source="Evenement" Target="Evenement.Titre" Category="Contains" />
+    <Link Source="Evenement" Target="Utilisateur" Category="Foreign Key" Annotations="" Bounds="1096.08038795345,309.374063612238,31.3922255247255,16.1200276311847" From="Evenement.OrganisateurId" IsUnique="False" Label="1:*" LabelBounds="1096.78957166411,299.694936381321,14.0733333333333,15.96" Name="Evenement -&gt; Utilisateur" To="Utilisateur.Id" />
+    <Link Source="IModel" Target="Billet" Category="Contains" />
+    <Link Source="IModel" Target="Evenement" Category="Contains" />
+    <Link Source="IModel" Target="Scan" Category="Contains" />
+    <Link Source="IModel" Target="Utilisateur" Category="Contains" />
+    <Link Source="Scan" Target="Billet" Category="Foreign Key" Annotations="" Bounds="21.3634202362569,228.572434852443,47.5049656386811,17.0916696308243" From="Scan.BilletId" IsUnique="False" Label="1:*" LabelBounds="39.8853014222536,217.150858544342,14.0733333333333,15.96" Name="Scan -&gt; Billet" To="Billet.Id" />
+    <Link Source="Scan" Target="Scan.Billet" Category="Contains" />
+    <Link Source="Scan" Target="Scan.BilletId" Category="Contains" />
+    <Link Source="Scan" Target="Scan.DateScan" Category="Contains" />
+    <Link Source="Scan" Target="Scan.Id" Category="Contains" />
+    <Link Source="Scan" Target="Scan.Resultat" Category="Contains" />
+    <Link Source="Scan" Target="Scan.ScannePar" Category="Contains" />
+    <Link Source="Scan" Target="Scan.ScanneParId" Category="Contains" />
+    <Link Source="Scan" Target="Utilisateur" Category="Foreign Key" Annotations="" Bounds="21.3634202362569,172.642984504517,1105.1196894741,34.4175562916198" From="Scan.ScanneParId" IsUnique="False" Label="1:*" LabelBounds="156.845845828287,157.119622150305,14.0733333333333,15.96" Name="Scan -&gt; Utilisateur" To="Utilisateur.Id" />
+    <Link Source="Utilisateur" Target="Utilisateur.DateCreation" Category="Contains" />
+    <Link Source="Utilisateur" Target="Utilisateur.Email" Category="Contains" />
+    <Link Source="Utilisateur" Target="Utilisateur.EstActif" Category="Contains" />
+    <Link Source="Utilisateur" Target="Utilisateur.Id" Category="Contains" />
+    <Link Source="Utilisateur" Target="Utilisateur.MotDePasseHash" Category="Contains" />
+    <Link Source="Utilisateur" Target="Utilisateur.Nom" Category="Contains" />
+    <Link Source="Utilisateur" Target="Utilisateur.PointsFidelite" Category="Contains" />
+    <Link Source="Utilisateur" Target="Utilisateur.Prenom" Category="Contains" />
+    <Link Source="Utilisateur" Target="Utilisateur.Role" Category="Contains" />
+  </Links>
+  <Categories>
+    <Category Id="Contains" Label="Contains" Description="Whether the source of the link contains the target object" CanBeDataDriven="False" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Contained By" IsContainment="True" OutgoingActionLabel="Contains" />
+    <Category Id="EntityType" />
+    <Category Id="Foreign Key" />
+    <Category Id="Model" />
+    <Category Id="Navigation Collection" />
+    <Category Id="Navigation Property" />
+    <Category Id="Property Foreign" />
+    <Category Id="Property Optional" />
+    <Category Id="Property Primary" />
+    <Category Id="Property Required" />
+  </Categories>
+  <Properties>
+    <Property Id="AfterSaveBehavior" Group="Property Flags" DataType="System.String" />
+    <Property Id="Annotations" Description="Annotations" Group="Model Properties" DataType="System.String" />
+    <Property Id="BaseClass" Description="Base class" Group="Model Properties" DataType="System.String" />
+    <Property Id="BeforeSaveBehavior" Group="Property Flags" DataType="System.String" />
+    <Property Id="Bounds" DataType="System.Windows.Rect" />
+    <Property Id="CanBeDataDriven" Label="CanBeDataDriven" Description="CanBeDataDriven" DataType="System.Boolean" />
+    <Property Id="CanLinkedNodesBeDataDriven" Label="CanLinkedNodesBeDataDriven" Description="CanLinkedNodesBeDataDriven" DataType="System.Boolean" />
+    <Property Id="ChangeTrackingStrategy" Description="Change tracking strategy" Group="Model Properties" DataType="System.String" />
+    <Property Id="Dependent" Description="Dependent entity" Group="Model Properties" DataType="System.String" />
+    <Property Id="Expression" DataType="System.String" />
+    <Property Id="Field" Description="Backing field" Group="Model Properties" DataType="System.String" />
+    <Property Id="From" Description="Target property" Group="Model Properties" DataType="System.String" />
+    <Property Id="GraphDirection" DataType="Microsoft.VisualStudio.Diagrams.Layout.LayoutOrientation" />
+    <Property Id="Group" Label="Group" Description="Display the node as a group" DataType="Microsoft.VisualStudio.GraphModel.GraphGroupStyle" />
+    <Property Id="GroupLabel" DataType="System.String" />
+    <Property Id="IncomingActionLabel" Label="IncomingActionLabel" Description="IncomingActionLabel" DataType="System.String" />
+    <Property Id="Inverse" Description="Inverse entity" Group="Model Properties" DataType="System.String" />
+    <Property Id="IsAbstract" Label="IsAbstract" Description="IsAbstract" Group="Model Properties" DataType="System.Boolean" />
+    <Property Id="IsAlternateKey" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsConcurrencyToken" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsContainment" DataType="System.Boolean" />
+    <Property Id="IsEnabled" DataType="System.Boolean" />
+    <Property Id="IsForeignKey" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsIndexed" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsPrimaryKey" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsRequired" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsShadow" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsUnicode" Group="Property Flags" DataType="System.Boolean" />
+    <Property Id="IsUnique" Group="Model Properties" DataType="System.Boolean" />
+    <Property Id="Label" Label="Label" Description="Displayable label of an Annotatable object" DataType="System.String" />
+    <Property Id="LabelBounds" DataType="System.Windows.Rect" />
+    <Property Id="Layout" DataType="System.String" />
+    <Property Id="MaxLength" DataType="System.String" />
+    <Property Id="Name" Group="Model Properties" DataType="System.String" />
+    <Property Id="OutgoingActionLabel" Label="OutgoingActionLabel" Description="OutgoingActionLabel" DataType="System.String" />
+    <Property Id="Principal" Description="Principal entity" Group="Model Properties" DataType="System.String" />
+    <Property Id="ProductVersion" Label="Product Version" Description="EF Core product version" Group="Model Properties" DataType="System.String" />
+    <Property Id="PropertyAccessMode" Group="Property Flags" DataType="System.String" />
+    <Property Id="TargetType" DataType="System.Type" />
+    <Property Id="To" Description="Source property" Group="Model Properties" DataType="System.String" />
+    <Property Id="Type" Description="CLR data type" Group="Model Properties" DataType="System.String" />
+    <Property Id="UseManualLocation" DataType="System.Boolean" />
+    <Property Id="Value" DataType="System.String" />
+    <Property Id="ValueGenerated" Group="Property Flags" DataType="System.String" />
+    <Property Id="ValueLabel" DataType="System.String" />
+    <Property Id="ZoomLevel" DataType="System.String" />
+  </Properties>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="EntityType" ValueLabel="True">
+      <Condition Expression="HasCategory('EntityType')" />
+      <Setter Property="Background" Value="#FFC0C0C0" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Property Primary" ValueLabel="True">
+      <Condition Expression="HasCategory('Property Primary')" />
+      <Setter Property="Background" Value="#FF008000" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Property Optional" ValueLabel="True">
+      <Condition Expression="HasCategory('Property Optional')" />
+      <Setter Property="Background" Value="#FF808040" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Property Foreign" ValueLabel="True">
+      <Condition Expression="HasCategory('Property Foreign')" />
+      <Setter Property="Background" Value="#FF8080FF" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Property Required" ValueLabel="True">
+      <Condition Expression="HasCategory('Property Required')" />
+      <Setter Property="Background" Value="#FFC0A000" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Navigation Property" ValueLabel="True">
+      <Condition Expression="HasCategory('Navigation Property')" />
+      <Setter Property="Background" Value="#FF990000" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Navigation Collection" ValueLabel="True">
+      <Condition Expression="HasCategory('Navigation Collection')" />
+      <Setter Property="Background" Value="#FFFF3232" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Model" ValueLabel="True">
+      <Condition Expression="HasCategory('Model')" />
+      <Setter Property="Background" Value="#FFFFFFFF" />
+    </Style>
+  </Styles>
+</DirectedGraph>

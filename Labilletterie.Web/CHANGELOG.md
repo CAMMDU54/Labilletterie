@@ -34,3 +34,19 @@
 - QuestPDF (génération PDF)
 - jsQR (lecture QR caméra)
 - Git + Git Flow + GitHub
+
+## [1.1.0] — 2026-06-25
+
+### ✅ Fonctionnalités ajoutées
+- Achat multiple de billets (1 à 10 par commande)
+- Calcul du total en temps réel selon type et quantité
+- Page de confirmation récapitulative pour les commandes multiples
+- Ajout URL image aux événements avec aperçu temps réel
+- Jeu de données de test complet (seed) :
+  20 événements / 6 catégories / 7 utilisateurs / 4 billets
+
+### 🐛 Corrections
+- Format datetime-local corrigé dans le formulaire événement
+- Route Detail événement (404 résolu)
+- Warnings QuestPDF corrigés (PageColor + FitWidth)
+- Script JavaScript achat multiple (parseFloat + window.onload)

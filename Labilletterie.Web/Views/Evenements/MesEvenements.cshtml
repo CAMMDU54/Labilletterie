@@ -33,7 +33,17 @@
             {
                 <div class="evenement-carte" style="cursor:default;">
                     <div class="evenement-carte__image">
-                        🎟️
+                        @if (!string.IsNullOrEmpty(evt.ImageUrl))
+                        {
+                            <img src="@evt.ImageUrl"
+                                 alt="@evt.Titre"
+                                 style="width:100%; height:100%;
+                            object-fit:cover; display:block;" />
+                        }
+                        else
+                        {
+                            <span style="font-size:3rem;">🎟️</span>
+                        }
                         <span class="evenement-carte__categorie">@evt.Categorie</span>
                     </div>
                     <div class="evenement-carte__corps">

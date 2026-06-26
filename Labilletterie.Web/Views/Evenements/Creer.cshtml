@@ -63,6 +63,22 @@
                 <span asp-validation-for="Lieu" class="erreur-champ"></span>
             </div>
 
+            <div class="form-groupe form-groupe--pleine-largeur">
+                <label asp-for="ImageUrl"></label>
+                <input asp-for="ImageUrl" class="form-input"
+                       placeholder="https://exemple.com/image.jpg" />
+                <span asp-validation-for="ImageUrl" class="erreur-champ"></span>
+
+                @* Aperçu de l'image en temps réel *@
+                <div id="apercu-image" style="display:none; margin-top: var(--espace-md);">
+                    <img id="img-apercu"
+                         src=""
+                         alt="Aperçu"
+                         style="width:100%; max-height:200px; object-fit:cover;
+                    border-radius: var(--arrondi-sm);" />
+                </div>
+            </div>
+
             <div class="form-groupe">
                 <label asp-for="NombrePlacesTotal"></label>
                 <input asp-for="NombrePlacesTotal" type="number" class="form-input" min="1" />
@@ -104,4 +120,24 @@
 
     // Au chargement, vérifie l'état initial
     if (checkbox.checked) champMdp.style.display = 'block';
+</script>
+<script>
+    // Aperçu de l'image en temps réel
+    const inputImage = document.getElementById('ImageUrl');
+    const apercuDiv = document.getElementById('apercu-image');
+    const imgApercu = document.getElementById('img-apercu');
+
+    inputImage.addEventListener('input', () => {
+        const url = inputImage.value.trim();
+        if (url) {
+            imgApercu.src = url;
+            apercuDiv.style.display = 'block';
+            // Cache l'aperçu si l'image ne charge pas
+            imgApercu.onerror = () => {
+                apercuDiv.style.display = 'none';
+            };
+        } else {
+            apercuDiv.style.display = 'none';
+        }
+    });
 </script>

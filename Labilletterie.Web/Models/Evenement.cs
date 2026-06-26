@@ -10,6 +10,11 @@ namespace Labilletterie.Models
         // Identifiant unique
         public int Id { get; set; }
 
+        // URL de l'image de l'événement (optionnelle)
+        [MaxLength(500)]
+        [Display(Name = "URL de l'image")]
+        public string? ImageUrl { get; set; }
+
         // Titre de l'événement
         [Required(ErrorMessage = "Le titre est obligatoire")]
         [MaxLength(200)]

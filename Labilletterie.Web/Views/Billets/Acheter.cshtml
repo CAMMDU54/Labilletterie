@@ -1,8 +1,9 @@
 @* Views/Billets/Acheter.cshtml *@
-@model Labilletterie.Models.Evenement
+@model Labilletterie.ViewModels.AchatViewModel
 
 @{
-    ViewData["Title"] = "Acheter un billet";
+    ViewData["Title"] = "Acheter des billets";
+    var evt = ViewBag.Evenement as Labilletterie.Models.Evenement;
 }
 
 @section Styles {
@@ -10,88 +11,248 @@
 }
 
 <div class="achat-container">
-    <h1>🎟️ Choisir votre billet</h1>
+    <h1>🎟️ Choisir vos billets</h1>
 
     <div class="achat-grille">
 
-        @* Formulaire de choix *@
+        @* ---- FORMULAIRE ---- *@
         <form asp-action="Confirmer" method="post">
             @Html.AntiForgeryToken()
-            <input type="hidden" name="evenementId" value="@Model.Id" />
+            <input type="hidden" asp-for="EvenementId" />
 
-            <div class="types-billets">
+            @* Types de billets *@
+            <div class="achat-resume" style="margin-bottom: var(--espace-lg);">
+                <h2 style="font-size:1.1rem; margin-bottom: var(--espace-lg);">
+                    Type de billet
+                </h2>
 
-                @* Standard *@
-                <label class="type-billet" id="label-standard">
-                    <input type="radio" name="typeBillet"              value="Standard" checked                    onchange="selectionnerType(this)" />
-                    <div class="type-billet__info">
-                        <span class="type-billet__nom">🎟️ Standard</span>
-                        <span class="type-billet__description">Accès général à l'événement</span>
-                    </div>
-                    <span class="type-billet__prix">
-                        @(Model.PrixBase == 0 ? "Gratuit" : Model.PrixBase.ToString("0.00") + " €")
-                    </span>
-                </label>
+                <div class="types-billets">
 
-                @* VIP *@
-                <label class="type-billet" id="label-vip">
-                    <input type="radio" name="typeBillet"     value="VIP"          onchange="selectionnerType(this)" />
-                    <div class="type-billet__info">
-                        <span class="type-billet__nom">⭐ VIP</span>
-                        <span class="type-billet__description">Accès prioritaire + zone VIP</span>
-                    </div>
-                    <span class="type-billet__prix">
-                        @((Model.PrixBase * 2).ToString("0.00")) €
-                    </span>
-                </label>
+                    @* Standard *@
+                    <label class="type-billet type-billet--selectionne"
+                           id="label-standard">
+                        <input type="radio" name="TypeBillet"
+                               value="Standard" checked
+                               onchange="selectionnerType(this)" />
+                        <div class="type-billet__info">
+                            <span class="type-billet__nom">🎟️ Standard</span>
+                            <span class="type-billet__description">
+                                Accès général à l'événement
+                            </span>
+                        </div>
+                        <span class="type-billet__prix">
+                            @(evt?.PrixBase == 0 ? "Gratuit"
+                                : evt?.PrixBase.ToString("0.00") + " €")
+                        </span>
+                    </label>
 
-                @* Réduit *@
-                <label class="type-billet" id="label-reduit">
-                    <input type="radio" name="typeBillet"                value="Réduit" onchange="selectionnerType(this)" />
-                    <div class="type-billet__info">
-                        <span class="type-billet__nom">🎓 Réduit</span>
-                        <span class="type-billet__description">Étudiant / -26 ans / PMR</span>
-                    </div>
-                    <span class="type-billet__prix">
-                        @((Model.PrixBase * 0.5m).ToString("0.00")) €
-                    </span>
-                </label>
+                    @* VIP *@
+                    <label class="type-billet" id="label-vip">
+                        <input type="radio" name="TypeBillet"
+                               value="VIP"
+                               onchange="selectionnerType(this)" />
+                        <div class="type-billet__info">
+                            <span class="type-billet__nom">⭐ VIP</span>
+                            <span class="type-billet__description">
+                                Accès prioritaire + zone VIP
+                            </span>
+                        </div>
+                        <span class="type-billet__prix">
+                            @((evt?.PrixBase * 2)?.ToString("0.00")) €
+                        </span>
+                    </label>
 
+                    @* Réduit *@
+                    <label class="type-billet" id="label-reduit">
+                        <input type="radio" name="TypeBillet"
+                               value="Réduit"
+                               onchange="selectionnerType(this)" />
+                        <div class="type-billet__info">
+                            <span class="type-billet__nom">🎓 Réduit</span>
+                            <span class="type-billet__description">
+                                Étudiant / -26 ans / PMR
+                            </span>
+                        </div>
+                        <span class="type-billet__prix">
+                            @((evt?.PrixBase * 0.5m)?.ToString("0.00")) €
+                        </span>
+                    </label>
+
+                </div>
+                <span asp-validation-for="TypeBillet" class="erreur-champ"></span>
             </div>
 
-            <button type="submit" class="btn-principal">
-                Confirmer l'achat →
-            </button>
+            @* Quantité *@
+            <div class="achat-resume" style="margin-bottom: var(--espace-lg);">
+                <h2 style="font-size:1.1rem; margin-bottom: var(--espace-lg);">
+                    Nombre de billets
+                </h2>
 
-        </form>
+                <div style="display:flex; align-items:center;
+                    gap: var(--espace-md); flex-wrap:wrap;">
 
-        @* Résumé de l'événement *@
-        <div class="achat-resume">
-            <h2>@Model.Titre</h2>
-            <ul class="achat-resume__meta">
-                <li>📅 @Model.DateEvenement.ToString("dddd dd MMMM yyyy à HH:mm")</li>
-                <li>📍 @Model.Lieu</li>
-                <li>🎭 @Model.Categorie</li>
-                <li>🎟️ @Model.NombrePlacesRestantes places restantes</li>
-            </ul>
+                    @* Bouton - *@
+                    <button type="button"
+                            class="btn-secondaire"
+                            style="width:44px; height:44px; font-size:1.3rem;
+                        padding:0; text-align:center; flex-shrink:0;"
+                            onclick="changerQuantite(-1)">
+                        −
+                    </button>
+
+                    @* Champ quantité — SANS readonly *@
+                    <input name="Quantite"
+                           id="quantite"
+                           type="number"
+                           class="form-input"
+                           style="width:80px; text-align:center;
+                    font-size:1.3rem; font-weight:700;"
+                           min="1"
+                           max="10"
+                           value="1" />
+
+                    @* Bouton + *@
+                    <button type="button"
+                            class="btn-secondaire"
+                            style="width:44px; height:44px; font-size:1.3rem;
+                        padding:0; text-align:center; flex-shrink:0;"
+                            onclick="changerQuantite(1)">
+                        +
+                    </button>
+
+                    <span style="color: var(--couleur-texte-secondaire); font-size:0.85rem;">
+                        (max. @Math.Min(evt?.NombrePlacesRestantes ?? 1, 10) billets)
+                    </span>
+
+                </div>
+                <span asp-validation-for="Quantite"
+                      class="erreur-champ" style="margin-top: var(--espace-sm);
+                display:block;"></span>
+            </div>
+
+            @* Total dynamique *@
+            <div class="achat-resume"
+                 style="margin-bottom: var(--espace-lg);
+                border-color: var(--couleur-bordeaux);
+                background-color: var(--couleur-bordeaux-transparent);">
+                <div style="display:flex; justify-content:space-between;
+                    align-items:center; margin-bottom: var(--espace-sm);">
+                    <span style="font-weight:700; font-size:1.1rem;">
+                        Total à payer
+                    </span>
+                    <span style="font-size:1.8rem; font-weight:800;"
+                          id="total-prix">
+                        @(evt?.PrixBase == 0 ? "Gratuit"
+                            : evt?.PrixBase.ToString("0.00") + " €")
+                    </span>
+                </div>
+                <div style="font-size:0.85rem;
+                    color: var(--couleur-texte-secondaire);">
+                    <span id="detail-calcul">
+                        1 billet × @evt?.PrixBase.ToString("0.00") €
+                    </span>
+                    <span style="margin-left: var(--espace-md);">
+                        🎁 +<span id="points-gagnes">
+                        @((int)(evt?.PrixBase ?? 0))
+                    </span> points fidélité
+                </span>
+            </div>
         </div>
 
+        <button type="submit" class="btn-principal">
+            ✅ Confirmer l'achat
+        </button>
+
+    </form>
+
+    @* ---- RÉSUMÉ ÉVÉNEMENT ---- *@
+    <div class="achat-resume">
+        @if (!string.IsNullOrEmpty(evt?.ImageUrl))
+        {
+            <img src="@evt.ImageUrl" alt="@evt.Titre"
+                 style="width:100%; height:160px; object-fit:cover;
+            border-radius: var(--arrondi-sm);
+            margin-bottom: var(--espace-lg);" />
+        }
+        <h2 style="font-size:1.2rem; margin-bottom: var(--espace-md);">
+            @evt?.Titre
+        </h2>
+        <ul class="achat-resume__meta">
+            <li>📅 @evt?.DateEvenement.ToString("dddd dd MMMM yyyy à HH:mm")</li>
+            <li>📍 @evt?.Lieu</li>
+            <li>🎭 @evt?.Categorie</li>
+            <li>
+                🎟️ <strong>@evt?.NombrePlacesRestantes</strong>
+                places restantes
+            </li>
+        </ul>
     </div>
+
+</div>
 </div>
 
-@* Gestion visuelle de la sélection *@
 <script>
-    // Sélectionne visuellement le bon label
-    function selectionnerType(radio) {
-        // Retire la classe de tous les labels
-        document.querySelectorAll('.type-billet').forEach(label => {
-            label.classList.remove('type-billet--selectionne');
-        });
-        // Ajoute la classe au label parent du radio sélectionné
-        radio.closest('.type-billet').classList.add('type-billet--selectionne');
+    // On déclare les prix en variables séparées pour éviter
+    // tout conflit entre la syntaxe Razor et JavaScript
+    var prixStandard = parseFloat("@((evt?.PrixBase ?? 0).ToString("F2", System.Globalization.CultureInfo.InvariantCulture))");
+    var prixVip      = parseFloat("@(((evt?.PrixBase ?? 0) * 2).ToString("F2", System.Globalization.CultureInfo.InvariantCulture))");
+    var prixReduit   = parseFloat("@(((evt?.PrixBase ?? 0) * 0.5m).ToString("F2", System.Globalization.CultureInfo.InvariantCulture))");
+    var maxPlaces    = parseInt("@(Math.Min(evt?.NombrePlacesRestantes ?? 1, 10))");
+    var typeCourant  = "Standard";
+
+    function getPrix() {
+        if (typeCourant === "VIP")    return prixVip;
+        if (typeCourant === "Reduit") return prixReduit;
+        return prixStandard;
     }
 
-    // Sélectionne "Standard" par défaut au chargement
-    document.getElementById('label-standard')
-        .classList.add('type-billet--selectionne');
+    function changerQuantite(delta) {
+        var input = document.getElementById("quantite");
+        var val   = parseInt(input.value) + delta;
+        if (val < 1)         val = 1;
+        if (val > maxPlaces) val = maxPlaces;
+        input.value = val;
+        mettreAJourTotal();
+    }
+
+    function selectionnerType(radio) {
+        var labels = document.querySelectorAll(".type-billet");
+        for (var i = 0; i < labels.length; i++) {
+            labels[i].classList.remove("type-billet--selectionne");
+        }
+        radio.closest(".type-billet").classList.add("type-billet--selectionne");
+        typeCourant = radio.value === "Réduit" ? "Reduit" : radio.value;
+        mettreAJourTotal();
+    }
+
+    function mettreAJourTotal() {
+        var input    = document.getElementById("quantite");
+        var quantite = parseInt(input.value);
+        if (isNaN(quantite) || quantite < 1) quantite = 1;
+
+        var prixUnit = getPrix();
+        var total    = prixUnit * quantite;
+
+        var elTotal = document.getElementById("total-prix");
+        var elDetail = document.getElementById("detail-calcul");
+        var elPoints = document.getElementById("points-gagnes");
+
+        if (elTotal)  elTotal.textContent  = total === 0 ? "Gratuit" : total.toFixed(2) + " €";
+        if (elDetail) elDetail.textContent = quantite + " billet" + (quantite > 1 ? "s" : "") + " x " + prixUnit.toFixed(2) + " €";
+        if (elPoints) elPoints.textContent = Math.floor(total);
+    }
+
+    // Écoute la saisie directe dans le champ
+    window.addEventListener("load", function() {
+        var input = document.getElementById("quantite");
+        if (input) {
+            input.addEventListener("input", function() {
+                var val = parseInt(this.value);
+                if (isNaN(val) || val < 1) this.value = 1;
+                if (val > maxPlaces)       this.value = maxPlaces;
+                mettreAJourTotal();
+            });
+        }
+        mettreAJourTotal();
+    });
 </script>

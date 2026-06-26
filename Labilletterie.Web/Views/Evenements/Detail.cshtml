@@ -13,6 +13,21 @@
 
     <div class="detail-evenement__entete">
         <span class="detail-evenement__badge">@Model.Categorie</span>
+
+        @* Image de l'événement *@
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            <div style="margin-bottom: var(--espace-xl);
+                border-radius: var(--arrondi-md);
+                overflow: hidden;
+                max-height: 400px;">
+                <img src="@Model.ImageUrl"
+                     alt="@Model.Titre"
+                     style="width:100%; height:400px;
+                object-fit:cover; display:block;" />
+            </div>
+        }
+
         <h1 class="detail-evenement__titre">@Model.Titre</h1>
     </div>
 
